@@ -4,7 +4,7 @@ function getTodosQuery() {
     return query
 }
 
-function getTodosByIdQuery() {
+function getTodoByIdQuery() {
     const query = `SELECT * FROM db_users.test  where id = ?`;
     return query
 }
@@ -20,5 +20,5 @@ function addTodoQuery() {
 
 
 export {
-    getTodosQuery, getTodosByIdQuery,addTodoQuery
+    getTodosQuery, getTodoByIdQuery,addTodoQuery
 }
