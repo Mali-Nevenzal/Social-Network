@@ -3,13 +3,16 @@
 export default class usersController {
     async getMemberById(req, res, next) {
         try {
-            const data = await getMember(req.params.id);
-            res.header("Access-Control-Allow-Origin", "*");
-            return res.json(data);
+
+            const testService = new TestService();
+            const resultItems = await testService.getTest()
+            return res.status(200).json(resultItems);
         }
-        catch (err) {
-            res.status(404).end("Error while seaeching member by id")
-            next(err);
+        catch (ex) {
+            const err = {}
+            err.statusCode = 500;
+            err.message = ex;
+            next(err)
         }
 
     }
