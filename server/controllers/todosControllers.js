@@ -1,6 +1,3 @@
-
-
-//import { TestService } from '../service/testService.js'
 import {TodosService} from '../service/todosService/todosService.js'
 export class TestController {
 
@@ -36,7 +33,7 @@ export class TestController {
     async addTodo(req, res) {
         try {
             const todosService = new TodosService();
-             await todosService.addTodo(req.body);
+            await todosService.addTodo(req.body);
             res.status(200).json({ status: 200 });
         }
         catch (ex) {
@@ -62,6 +59,7 @@ export class TestController {
         }
     }
 
+    
     async updateTodo(req, res) {
         try {
             console.log("todo");
@@ -76,8 +74,5 @@ export class TestController {
             next(err)
         }
     }
-
-
-
 
 }

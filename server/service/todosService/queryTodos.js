@@ -14,11 +14,18 @@ function addTodoQuery() {
     return query
 }
 
-
+function deleteTodoQuery(){
+    const query='DELETE FROM social_network.todos WHERE id=?;';
+    return query;
+}
+function updateTodoQuery(){
+    const query='UPDATE social_network.todos SET title = ?, completed = ? WHERE id=?;';
+    return query;
+}
     
 
 
 
 export {
-    getTodosQuery, getTodoByIdQuery,addTodoQuery
+    getTodosQuery, getTodoByIdQuery,addTodoQuery,deleteTodoQuery,updateTodoQuery
 }
