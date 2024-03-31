@@ -1,11 +1,10 @@
-//import { getAllMembers, getMember, UpdateMember, deleteMember, addMember } from "../service/memberService.js";
-
+import {UserService} from '../service/UserService/userService.js'
 export default class usersController {
-    async getMemberById(req, res, next) {
+    async getAllUsers(req, res, next) {
         try {
 
-            const testService = new TestService();
-            const resultItems = await testService.getTest()
+            const userService = new UserService();
+            const resultItems = await userService.getUsers()
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -16,36 +15,48 @@ export default class usersController {
         }
 
     }
-    async getAllMembers(req, res, next) {
+    
+    async getUserById(req, res, next) {
         try {
-            const data = await getAllMembers();
-            res.header("Access-Control-Allow-Origin", "*");
-            res.send(data);
+
+            const userService = new UserService();
+            const resultItems = await userService.getUserById(req.params.id);
+            return res.status(200).json(resultItems);
         }
-        catch (err) {
-            res.status(404).end("Error while searching member")
-            next(err);
+        catch (ex) {
+            const err = {}
+            err.statusCode = 500;
+            err.message = ex;
+            next(err)
         }
     }
 
-    async updateMember(req, res, next) {
+    async updateUser(req, res, next) {
         try {
-            const response = await UpdateMember(req.params.id, req.body);
-            res.json(response);
+
+            const userService = new UserService();
+            const resultItems = await userService.updateUser(req.body);
+            return res.status(200).json(resultItems);
         }
-        catch (err) {
-            res.status(404).end("Error while updating member")
-            next(err);
+        catch (ex) {
+            const err = {}
+            err.statusCode = 500;
+            err.message = ex;
+            next(err)
         }
     }
-    async deleteMember(req, res, next) {
+    async deleteUser(req, res, next) {
         try {
-            const response = await deleteMember(req.params.id);
-            res.json(response);
+
+            const userService = new UserService();
+            const resultItems = await userService.deleteUser(req.params.id);
+            return res.status(200).json(resultItems);
         }
-        catch (err) {
-            res.status(404).end("Error while deleting member")
-            next(err);
+        catch (ex) {
+            const err = {}
+            err.statusCode = 500;
+            err.message = ex;
+            next(err)
         }
     }
     async addMember(req, res, next) {
