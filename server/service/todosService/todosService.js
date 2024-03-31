@@ -29,12 +29,11 @@ export class TodosService {
         return result;
     }
 
-    async updateUser(updatedTodo) {
-        const queryUser =updateTodoQuery();
-        const result =  await query(queryUser, [updatedTodo.title, updatedTodo.completed,updatedUser.id]);
+    async updateTodo(updatedTodo) {
+        const queryTodo =updateTodoQuery();
+        const result =  await query(queryTodo, [updatedTodo.title, updatedTodo.completed,updatedTodo.id]);
         return result;
     }
-
 
 }
 

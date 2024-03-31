@@ -1,5 +1,5 @@
 import {PostService} from '../service/UserService/userService.js'
-export default class postsController {
+export default class PostsController {
     async getAllPosts(req, res, next) {
         try {
 
