@@ -1,5 +1,5 @@
 import { query } from '../db.js'
-import { getUsersQuery,getUserByIdQuery,deleteUserQuery} from './queryUsers.js'
+import { getUsersQuery,getUserByIdQuery,deleteUserQuery,updateUserQuery,addUserQuery} from './queryUsers.js'
 
 export class UsersService {
 
@@ -21,9 +21,13 @@ export class UsersService {
     }
     async updateUser(updatedUser) {
         const queryUser =updateUserQuery();
-        const result =  await query(queryUser, [updatedUser.]);
+        const result =  await query(queryUser, [updatedUser.name, updatedUser.email,updatedUser.phone,updatedUser.id]);
         return result;
     }
-
+    async addUser(User) {
+        const queryUser =addUserQuery();
+        const result =  await query(queryUser, [User.username,User.name, User.email,User.phone]);
+        return result;
+    }
 
 }

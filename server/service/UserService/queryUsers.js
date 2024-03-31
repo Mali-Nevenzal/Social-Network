@@ -14,10 +14,13 @@ function deleteUserQuery(){
     return query;
 }
 function updateUserQuery(){
-    const query='';
+    const query='UPDATE social_network.users SET name = ?, email = ?,phone=?  WHERE id=?;';
     return query;
 }
-
+function addUserQuery(){
+    const query='INSERT INTO table_name (username, name, email, phone) VALUES (?, ?, ?, ?);';
+    return query;
+}
 export{
-    getUsersQuery,getUserByIdQuery,deleteUserQuery
+    getUsersQuery,getUserByIdQuery,deleteUserQuery,updateUserQuery,addUserQuery
 }

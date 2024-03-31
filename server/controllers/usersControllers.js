@@ -59,14 +59,18 @@ export default class usersController {
             next(err)
         }
     }
-    async addMember(req, res, next) {
+    async addUser(req, res, next) {
         try {
-            const response = await addMember(req.body);
-            res.json(response);
+
+            const userService = new UserService();
+            const resultItems = await userService.addUser(req.body);
+            return res.status(200).json(resultItems);
         }
-        catch (err) {
-            res.status(404).end("Error while adding member")
-            next(err);
+        catch (ex) {
+            const err = {}
+            err.statusCode = 500;
+            err.message = ex;
+            next(err)
         }
     }
 }
