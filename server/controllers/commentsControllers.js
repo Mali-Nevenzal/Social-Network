@@ -1,10 +1,11 @@
-import {TodosService} from '../service/todosService/todosService.js'
-export class TodosController {
+import {CommentsService} from '../service/commentsService/commentsService.js'
 
-    async getTodos(req, res, next) {
+export class CommentsController {
+
+    async getComments(req, res, next) {
         try {
-            const todosService = new TodosService();
-            const resultItems = await todosService.getTodos()
+            const commentsService = new CommentsService();
+            const resultItems = await commentsService.getComments()
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -15,10 +16,10 @@ export class TodosController {
         }
     }
 
-    async getTodoById(req, res) {
+    async getCommentById(req, res) {
         try {
-            const todosService = new TodosService();
-            const resultItem = await todosService.getTodoById(req.params.id);
+            const commentsService = new CommentsService();
+            const resultItem = await commentsService.getCommentById(req.params.id);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {
@@ -30,10 +31,10 @@ export class TodosController {
     }
 
 
-    async addTodo(req, res) {
+    async addComment(req, res) {
         try {
-            const todosService = new TodosService();
-            await todosService.addTodo(req.body);
+            const commentsService = new CommentsService();
+            await commentsService.addComment(req.body);
             res.status(200).json({ status: 200 });
         }
         catch (ex) {
@@ -45,9 +46,9 @@ export class TodosController {
     }
 
 
-    async deleteTodo(req, res) {
+    async deleteComment(req, res) {
         try {
-            console.log("todo");
+            console.log("Comment");
             console.log(req.params.id);
             res.status(200).json({ status: 200, data: req.params.id });
         }
@@ -60,9 +61,9 @@ export class TodosController {
     }
 
     
-    async updateTodo(req, res) {
+    async updateComment(req, res) {
         try {
-            console.log("todo");
+            console.log("Comment");
             console.log(req.params.id);
             console.log(req.body);
             res.status(200).json({ status: 200, data: req.params.id });

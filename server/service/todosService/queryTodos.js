@@ -1,11 +1,10 @@
-
 function getTodosQuery() {
-    const query = `SELECT * FROM db_users.test `;
+    const query = `SELECT * FROM db_users.todos `;
     return query
 }
 
 function getTodoByIdQuery() {
-    const query = `SELECT * FROM db_users.test  where id = ?`;
+    const query = `SELECT * FROM db_users.todos  where id = ?`;
     return query
 }
 

@@ -1,8 +1,8 @@
 import express from "express";
-import { TestController } from '../controllers/testController.js'
+import { TodosController } from "../controllers/todosControllers.js";
 const todosRouter = express.Router();
 
-const testcontroller = new TestController()
+const testcontroller = new TodosController()
 
 todosRouter.get("/:id", testcontroller.getTestById)
 todosRouter.get("/", testcontroller.getTest)
