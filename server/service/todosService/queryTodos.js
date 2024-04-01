@@ -1,10 +1,14 @@
+import 'dotenv/config'
+const db = process.env.DB_NAME;
+
+
 function getTodosQuery() {
-    const query = `SELECT * FROM db_users.todos `;
+    const query = `SELECT * FROM ${db}.todos `;
     return query
 }
 
 function getTodoByIdQuery() {
-    const query = `SELECT * FROM db_users.todos  where id = ?`;
+    const query = `SELECT * FROM ${db}.todos  where id = ?`;
     return query
 }
 
@@ -14,16 +18,14 @@ function addTodoQuery() {
 }
 
 function deleteTodoQuery(){
-    const query='DELETE FROM social_network.todos WHERE id=?;';
+    const query= `DELETE FROM ${db}.todos WHERE id=?`;
     return query;
 }
 function updateTodoQuery(){
-    const query='UPDATE social_network.todos SET title = ?, completed = ? WHERE id=?;';
+    const query=`UPDATE ${db}.todos SET title = ?, completed = ? WHERE id=?`;
     return query;
 }
     
-
-
 
 export {
     getTodosQuery, getTodoByIdQuery,addTodoQuery,deleteTodoQuery,updateTodoQuery

@@ -1,11 +1,13 @@
+import 'dotenv/config'
+const db = process.env.DB_NAME;
 
 function getCommentsQuery() {
-    const query = `SELECT * FROM db_users.comments `;
+    const query = `SELECT * FROM ${db}.comments `;
     return query
 }
 
 function getCommentByIdQuery() {
-    const query = `SELECT * FROM db_users.comments  where id = ?`;
+    const query = `SELECT * FROM ${db}.comments  where id = ?`;
     return query
 }
 
@@ -15,16 +17,13 @@ function addCommentQuery() {
 }
 
 function deleteCommentQuery(){
-    const query='DELETE FROM social_network.comments WHERE id=?;';
+    const query= `DELETE FROM ${db}.comments WHERE id=?`;
     return query;
 }
 function updateCommentQuery(){
-    const query='UPDATE social_network.comments SET body = ? WHERE id=?;';
+    const query= `UPDATE ${db}.comments SET body = ? WHERE id=?`;
     return query;
 }
-    
-
-
 
 export {
     getCommentsQuery, getCommentByIdQuery,addCommentQuery,deleteCommentQuery,updateCommentQuery

@@ -1,5 +1,5 @@
 import {UserService} from '../service/UserService/userService.js'
-export default class usersController {
+export default class UsersController {
     async getAllUsers(req, res, next) {
         try {
 
