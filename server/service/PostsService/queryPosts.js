@@ -10,18 +10,18 @@ function getPostByIdQuery() {
     return query
 }
 function deletePostQuery(){
-    const query='DELETE FROM social_network.posts WHERE id=?;';
+    const query='UPDATE social_network.posts SET isActive=FALSE WHERE id=?;';
     return query;
 }
 function updatePostQuery(){
-    const query='UPDATE social_network.posts SET title = ?, body = ?  WHERE id=?;';
+    const query='UPDATE social_network.posts SET title = ?, body = ? ,isActive=? WHERE id=?;';
     return query;
 }
 function addPostQuery(){
-    const query='INSERT INTO social_network.posts (user_id, title, body) VALUES ( ?, ?, ?);';
+    const query='INSERT INTO social_network.posts (user_id, title, body,isActive) VALUES ( ?, ?, ?,?);';
     return query;
 }
  
 export{
-    getPostsQuery,getPostByIdQuery,updatePostQuery,deletePostQuery
+    getPostsQuery,getPostByIdQuery,updatePostQuery,deletePostQuery,addPostQuery
 }

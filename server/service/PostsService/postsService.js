@@ -1,5 +1,5 @@
 import { query } from '../db.js'
-import { getPostsQuery,getPostByIdQuery,updatePostQuery,addPostQuery} from './queryPosts.js'
+import { getPostsQuery,getPostByIdQuery,updatePostQuery,addPostQuery,deletePostQuery} from './queryPosts.js'
 
 export class PostsService {
 
@@ -21,12 +21,12 @@ export class PostsService {
     }
     async updatePost(updatedPost) {
         const queryUser =updatePostQuery();
-        const result =  await query(queryUser, [updatedPost.title, updatedPost.body,updatedPost.id]);
+        const result =  await query(queryUser, [updatedPost.title, updatedPost.body,updatedPost.isActive,updatedPost.id]);
         return result;
     }
     async addPost(Post) {
         const queryUser =addPostQuery();
-        const result =  await query(queryUser, [Post.user_id, Post.title, Post.body]);
+        const result =  await query(queryUser, [Post.user_id, Post.title, Post.body,Post.isActive]);
         return result;
     }
 

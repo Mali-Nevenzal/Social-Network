@@ -10,15 +10,15 @@ function getUserByIdQuery() {
     return query
 }
 function deleteUserQuery(){
-    const query='DELETE FROM social_network.users WHERE id=?;';
+    const query='UPDATE social_network.users SET isActive=FALSE WHERE id=?;';
     return query;
 }
 function updateUserQuery(){
-    const query='UPDATE social_network.users SET name = ?, email = ?,phone=?  WHERE id=?;';
+    const query='UPDATE social_network.users SET name = ?, email = ?,phone=? ,isActive=? WHERE id=?;';
     return query;
 }
 function addUserQuery(){
-    const query='INSERT INTO table_name (username, name, email, phone) VALUES (?, ?, ?, ?);';
+    const query='INSERT INTO table_name (username, name, email, phone,isActive) VALUES (?, ?, ?, ?,?);';
     return query;
 }
 export{

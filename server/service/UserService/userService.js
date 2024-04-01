@@ -21,12 +21,12 @@ export class UsersService {
     }
     async updateUser(updatedUser) {
         const queryUser =updateUserQuery();
-        const result =  await query(queryUser, [updatedUser.name, updatedUser.email,updatedUser.phone,updatedUser.id]);
+        const result =  await query(queryUser, [updatedUser.name, updatedUser.email,updatedUser.phone,updatedUser.isActive,updatedUser.id]);
         return result;
     }
     async addUser(User) {
         const queryUser =addUserQuery();
-        const result =  await query(queryUser, [User.username,User.name, User.email,User.phone]);
+        const result =  await query(queryUser, [User.username,User.name, User.email,User.phone,User.isActive]);
         return result;
     }
 
