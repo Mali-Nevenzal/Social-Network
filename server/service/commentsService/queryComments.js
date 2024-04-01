@@ -12,7 +12,7 @@ function getCommentByIdQuery() {
 }
 
 function addCommentQuery() {
-    const query = `INSERT INTO Comments(post_id,name,email,body) VALUES (?,?,?,?)`;
+    const query = `INSERT INTO comments(post_id,name,email,body) VALUES (?,?,?,?)`;
     return query
 }
 
