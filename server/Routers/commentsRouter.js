@@ -5,11 +5,11 @@ const commentRouter = express.Router();
 
 const commentController = new CommentsController()
 
-commentRouter.get("/:id", commentController.getTestById)
-commentRouter.get("/", commentController.getTest)
-commentRouter.post("/", commentController.addTest)
-commentRouter.delete("/:id", commentController.deleteTest)
-commentRouter.put("/:id", commentController.updateTest)
+commentRouter.get("/:id", commentController.getCommentById)
+commentRouter.get("/", commentController.getComments)
+commentRouter.post("/", commentController.addComment)
+commentRouter.delete("/:id", commentController.deleteComment)
+commentRouter.put("/:id", commentController.updateComment)
 
 export {
     commentRouter
