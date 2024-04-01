@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import {usersRouter} from './Routers/usersRouter.js'
 import {postsRouter} from './Routers/postsRouter.js'
 import {todosRouter} from './Routers/todosRouter.js'
