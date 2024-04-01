@@ -1,6 +1,11 @@
-import express from "express";
-import cors from 'cors';
+import 'dotenv/config'
+import {usersRouter} from './Routers/usersRouter.js'
+import {postsRouter} from './Routers/postsRouter.js'
+import {todosRouter} from './Routers/todosRouter.js'
+import {commentsRouter} from './Routers/commentsRouter.js'
 import { logErrors } from "./middleware/logErrors.js";
+import express from 'express';
+import cors from 'cors';
 
 const app = express();
 app.use(cors());
