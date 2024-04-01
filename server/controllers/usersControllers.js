@@ -1,9 +1,9 @@
-import {UserService} from '../service/UserService/userService.js'
+import {UsersService} from '../service/UserService/userService.js'
 export default class UsersController {
     async getAllUsers(req, res, next) {
         try {
 
-            const userService = new UserService();
+            const userService = new UsersService();
             const resultItems = await userService.getUsers()
             return res.status(200).json(resultItems);
         }
@@ -19,7 +19,7 @@ export default class UsersController {
     async getUserById(req, res, next) {
         try {
 
-            const userService = new UserService();
+            const userService = new UsersService();
             const resultItems = await userService.getUserById(req.params.id);
             return res.status(200).json(resultItems);
         }
@@ -34,7 +34,7 @@ export default class UsersController {
     async updateUser(req, res, next) {
         try {
 
-            const userService = new UserService();
+            const userService = new UsersService();
             const resultItems = await userService.updateUser(req.body);
             return res.status(200).json(resultItems);
         }
@@ -48,7 +48,7 @@ export default class UsersController {
     async deleteUser(req, res, next) {
         try {
 
-            const userService = new UserService();
+            const userService = new UsersService();
             const resultItems = await userService.deleteUser(req.params.id);
             return res.status(200).json(resultItems);
         }
@@ -62,7 +62,7 @@ export default class UsersController {
     async addUser(req, res, next) {
         try {
 
-            const userService = new UserService();
+            const userService = new UsersService();
             const resultItems = await userService.addUser(req.body);
             return res.status(200).json(resultItems);
         }

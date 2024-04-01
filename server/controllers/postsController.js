@@ -1,4 +1,6 @@
-import {PostService} from '../service/UserService/userService.js'
+
+//import {PostService} from '../service/PostsService/postsService.js'
+import { PostService } from "../service/postsService/postsService.js";
 export default class PostsController {
     async getAllPosts(req, res, next) {
         try {

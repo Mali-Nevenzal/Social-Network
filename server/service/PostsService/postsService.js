@@ -1,7 +1,7 @@
 import { query } from '../db.js'
 import { getPostsQuery,getPostByIdQuery,updatePostQuery,addPostQuery,deletePostQuery} from './queryPosts.js'
 
-export class PostsService {
+export class PostService {
 
     async getPosts() {
         const queryUsers = getPostsQuery();
