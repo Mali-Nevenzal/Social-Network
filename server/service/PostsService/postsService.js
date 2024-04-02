@@ -1,5 +1,6 @@
+import { deleteCommentByPostIdQuery } from '../commentsService/queryComments.js';
 import { query } from '../db.js'
-import { getPostsQuery,getPostByIdQuery,updatePostQuery,addPostQuery,deletePostQuery} from './queryPosts.js'
+import { getPostsQuery,getPostByIdQuery,updatePostQuery,addPostQuery,deletePostQuery, deletePostByUserIdQuery} from './queryPosts.js'
 
 export class PostService {
 
@@ -15,8 +16,16 @@ export class PostService {
         return result;
     }
     async deletePost(id) {
+        const queryComments=deleteCommentByPostIdQuery();
+        const resultComments=await query(queryComments,[id]);
         const queryUser =deletePostQuery();
         const result =  await query(queryUser, [id]);
+        return result;
+    }
+    async deletePostByUserId(user_id)
+    {
+        const queryPost=deletePostByUserIdQuery();
+        const result =await query(queryPost,[user_id]);
         return result;
     }
     async updatePost(updatedPost) {

@@ -1,4 +1,6 @@
 import { query } from '../db.js'
+import { deletePostByUserIdQuery, deletePostQuery } from '../postsService/queryPosts.js';
+import { deleteTodoQuery } from '../todosService/queryTodos.js';
 import { getUsersQuery,getUserByIdQuery,deleteUserQuery,updateUserQuery,addUserQuery} from './queryUsers.js'
 
 export class UsersService {
@@ -15,6 +17,12 @@ export class UsersService {
         return result;
     }
     async deleteUser(id) {
+        const queryUserTodos=deleteTodoQuery();
+        const resultTodo =  await query(queryUser, [id]);
+        //delete comments check how to delete with post id
+        const queryUserPosts=deletePostByUserIdQuery();
+        const resultPost =  await query(queryUser, [id]);
+        
         const queryUser =deleteUserQuery();
         const result =  await query(queryUser, [id]);
         return result;
