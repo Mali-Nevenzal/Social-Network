@@ -20,11 +20,15 @@ function deleteCommentQuery(){
     const query= `DELETE FROM ${db}.comments WHERE id=?`;
     return query;
 }
+function deleteCommentByPostIdQuery(){
+    const query= `DELETE FROM ${db}.comments WHERE post_id=?`;
+    return query;
+}
 function updateCommentQuery(){
     const query= `UPDATE ${db}.comments SET body = ? WHERE id=?`;
     return query;
 }
 
 export {
-    getCommentsQuery, getCommentByIdQuery,addCommentQuery,deleteCommentQuery,updateCommentQuery
+    getCommentsQuery, getCommentByIdQuery,addCommentQuery,deleteCommentQuery,updateCommentQuery,deleteCommentByPostIdQuery
 }

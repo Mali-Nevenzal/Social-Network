@@ -15,6 +15,12 @@ function deletePostQuery(){
     const query=`UPDATE  ${db}.posts SET isActive=FALSE WHERE id=?;`;
     return query;
 }
+function deletePostByUserIdQuery(){
+    const query=`UPDATE  ${db}.posts SET isActive=FALSE WHERE user_id=?;`;
+
+    return query;
+}
+
 
 function updatePostQuery(){
 
@@ -28,5 +34,5 @@ function addPostQuery(){
 }
  
 export{
-    getPostsQuery,getPostByIdQuery,updatePostQuery,deletePostQuery,addPostQuery
+    getPostsQuery,getPostByIdQuery,updatePostQuery,deletePostQuery,addPostQuery,deletePostByUserIdQuery
 }
