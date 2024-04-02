@@ -12,4 +12,17 @@ function phonenumberValid(inputtxt) {
     return false;
   }
 
-  export {phonenumberValid,emailValid}
+  function userNameValid(input) {
+    var regex = /^[a-zA-Z]+$/;
+        if (input.length > 11) {
+      return false;
+    }
+        if (regex.test(input)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  export {phonenumberValid,emailValid,userNameValid}
+
+ 
