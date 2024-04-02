@@ -1,6 +1,5 @@
 
 import { query } from '../db.js';
-import { getRegisterByEmailQuery,addRegisterQuery,deleteRegisterQuery } from './queryRegister.js';
 import {addQuery,deleteQuery,getByIdQuery} from '../query.js'
 
 export class RegisterService {
