@@ -61,11 +61,10 @@ export class CommentsController {
     }
 
     
-    async updateComment(req, res) {
+    async updateComment(req, res,next) {
         try {
-            console.log("Comment");
-            console.log(req.params.id);
-            console.log(req.body);
+            const commentsService = new CommentsService();
+            await commentsService.updateComment(req.body);
             res.status(200).json({ status: 200, data: req.params.id });
         }
         catch (ex) {

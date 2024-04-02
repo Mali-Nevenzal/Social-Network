@@ -26,7 +26,7 @@ export class PostService {
     }
 
     async updatePost(updatedPost) {
-        const queryUser =updateQuery("posts","title = ?, body = ?,isActive=?");
+        const queryUser =updateQuery("posts","title = ?, body = ?,is_active=?");
         const result =  await query(queryUser, [updatedPost.title, updatedPost.body,updatedPost.isActive,updatedPost.id]);
         return result;
     }
