@@ -47,9 +47,10 @@ export class TodosController {
 
     async deleteTodo(req, res) {
         try {
-            console.log("todo");
-            console.log(req.params.id);
-            res.status(200).json({ status: 200, data: req.params.id });
+            console.log("todos");
+            const todoService = new TodosService();
+            await todoService.deletetodo(req.params.id,"id");
+            return res.status(200).json({ status: 200, data: req.params.id });
         }
         catch (ex) {
             const err = {}

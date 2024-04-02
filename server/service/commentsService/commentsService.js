@@ -25,14 +25,9 @@ export class CommentsService {
     }
 
     async deleteComment(id,idParameter) {
-        const queryComment = deleteQuery("comments",`${idParameter}`);
+        const queryComment = deleteQuery("comments",idParameter);
         const result =  await query(queryComment, [id]);
         return result;
-    }
-    async deleteCommentByPostId(post_id)
-    {
-        const queryComment=deleteCommentByPostIdQuery();
-        const result=await query(queryComment,[post_id]);
     }
 
     async updateUser(updatedComment) {

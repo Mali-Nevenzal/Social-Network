@@ -24,7 +24,7 @@ function addQuery(table_name,values,columnsNum){
     return query;
 }
 function deleteByIsActiveQuery(table_name,idParameter){
-    const query=`UPDATE ${db}.${table_name} SET isActive=FALSE WHERE ${idParameter} = ?`;
+    const query=`UPDATE ${db}.${table_name} SET is_active=0 WHERE ${idParameter} = ?`;
     return query;
 }
 export{

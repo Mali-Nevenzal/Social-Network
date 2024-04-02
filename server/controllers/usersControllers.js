@@ -47,10 +47,10 @@ export default class UsersController {
     }
     async deleteUser(req, res, next) {
         try {
-
+            console.log("users");
             const userService = new UsersService();
-            const resultItems = await userService.deleteUser(req.params.id);
-            return res.status(200).json(resultItems);
+            await userService.deleteUser(req.params.id);
+            return res.status(200).json({ status: 200, data: req.params.id });
         }
         catch (ex) {
             const err = {}
@@ -61,10 +61,10 @@ export default class UsersController {
     }
     async addUser(req, res, next) {
         try {
-
+            console.log(req.body);
             const userService = new UsersService();
-            const resultItems = await userService.addUser(req.body);
-            return res.status(200).json(resultItems);
+            await userService.addUser(req.body);
+            res.status(200).json({status: 200});
         }
         catch (ex) {
             const err = {}
