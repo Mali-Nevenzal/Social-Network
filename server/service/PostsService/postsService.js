@@ -6,13 +6,13 @@ const commentsService = new CommentsService;
 export class PostService {
 
     async getPosts() {
-        const queryUsers = getQuery("posts");
+        const queryUsers = getQuery("posts" ,"Where is_active=1");
         const result = await query(queryUsers);
         return result;
     }
 
     async getPostById(id) {
-        const queryPost = getByIdQuery("posts","id");
+        const queryPost = getByIdQuery("posts","is_active=1 AND id");
         const result =  await query(queryPost, [id]);
         return result;
     }
