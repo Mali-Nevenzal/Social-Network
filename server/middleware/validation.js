@@ -19,9 +19,6 @@ function phonenumberValid(inputtxt) {
     return true;
   }
 
-  function isUserIdExistsValid(user_id){
-    
-  }
   export {phonenumberValid,emailValid,userNameValid}
 
  
