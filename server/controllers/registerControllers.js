@@ -40,9 +40,10 @@ export class RegisterController {
 
     async deleteRegister(req, res) {
         try {
-            console.log("Register");
-            console.log(req.params.email);
-            res.status(200).json({ status: 200, data: req.params.email });
+            console.log("register");
+            const registerService = new TodosService();
+            await registerService.deleteRegister(req.params.email,"email");
+            return res.status(200).json({ status: 200, data: req.params.email });
         }
         catch (ex) {
             const err = {}
