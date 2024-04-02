@@ -14,14 +14,13 @@ function phonenumberValid(inputtxt) {
 
   function userNameValid(input) {
     var regex = /^[a-zA-Z]+$/;
-        if (input.length > 11) {
+    if ((input.length > 11) || !regex.test(input)) 
       return false;
-    }
-        if (regex.test(input)) {
-      return true;
-    } else {
-      return false;
-    }
+    return true;
+  }
+
+  function isUserIdExistsValid(user_id){
+    
   }
   export {phonenumberValid,emailValid,userNameValid}
 
