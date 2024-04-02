@@ -1,4 +1,5 @@
 import {UsersService} from '../service/UserService/userService.js'
+import { RegisterService } from '../service/registerService/registerService.js';
 export default class UsersController {
     async getAllUsers(req, res, next) {
         try {
@@ -48,8 +49,19 @@ export default class UsersController {
         try {
             console.log("users");
             const userService = new UsersService();
+            const resultItems = await userService.getUserById(req.params.id);
+            console.log(resultItems[0].email);
+            const registerService=new RegisterService();
+            await registerService.deleteRegister(result[0].email);
+            console.log("after delete register");
             await userService.deleteUser(req.params.id);
             return res.status(200).json({ status: 200, data: req.params.id });
+            //console.log("users");
+         
+            //const registerService=new RegisterService();
+            //await registerService.deleteRegister(result[0].email);
+           // console.log("resualt " +result);
+   
         }
         catch (ex) {
             const err = {}
