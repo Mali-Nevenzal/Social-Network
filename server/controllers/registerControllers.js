@@ -2,10 +2,10 @@ import { RegisterService } from '../service/registerService/registerService.js';
 
 export class RegisterController {
 
-    async getUserByEmail(req, res) {
+    async getRegisterByEmail(req, res) {
         try {
             const registerService = new RegisterService();
-            const resultItem = await registerService.getUserByEmail(req.params.email);
+            const resultItem = await registerService.getRegisterByEmail(req.params.email);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {
@@ -16,10 +16,10 @@ export class RegisterController {
         }
     }
 
-    async addUser(req, res) {
+    async addRegister(req, res) {
         try {
             const registerService = new RegisterService();
-            await registerService.addUser(req.body);
+            await registerService.addRegister(req.body);
             res.status(200).json({ status: 200 });
         }
         catch (ex) {
@@ -31,7 +31,7 @@ export class RegisterController {
     }
 
 
-    async deleteUser(req, res) {
+    async deleteRegister(req, res) {
         try {
             console.log("Register");
             console.log(req.params.email);

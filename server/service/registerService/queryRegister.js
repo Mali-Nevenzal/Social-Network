@@ -1,21 +1,21 @@
 import 'dotenv/config'
 const db = process.env.DB_NAME;
 
-function getUserByEmailQuery() {
+function getRegisterByEmailQuery() {
     const query = `SELECT * FROM ${db}.register  where email = ?`;
     return query
 }
 
-function addUserQuery() {
+function addRegisterQuery() {
     const query = `INSERT INTO register(email,password) VALUES (?,?)`;
     return query
 }
 
-function deleteUserQuery(){
+function deleteRegisterQuery(){
     const query= `DELETE FROM ${db}.register WHERE email=?`;
     return query;
 }
 
 export {
-    deleteUserQuery, addUserQuery,getUserByEmailQuery
+    deleteRegisterQuery, addRegisterQuery,getRegisterByEmailQuery
 }

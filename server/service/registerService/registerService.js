@@ -1,23 +1,23 @@
 
 import { query } from '../db.js';
-import { getUserByEmailQuery,addRegisterQuery,deleteRegisterQuery } from './queryRegister.js';
+import { getRegisterByEmailQuery,addRegisterQuery,deleteRegisterQuery } from './queryRegister.js';
 
 export class RegisterService {
 
 
-    async getUserByEmail(email) {
-        const queryRegister = getUserByEmailQuery();
+    async getRegisterByEmail(email) {
+        const queryRegister = getRegisterByEmailQuery();
         const result =  await query(queryRegister, [email]);
         return result;
     }
 
-    async addUser(user) {
+    async addRegister(user) {
         const queryRegister = addRegisterQuery();
         const result =  await query(queryRegister, [user.email,user.password]);
         return result;
     }
 
-    async deleteUser(email) {
+    async deleteRegister(email) {
         const queryRegister = deleteRegisterQuery();
         const result =  await query(queryRegister, [email]);
         return result;

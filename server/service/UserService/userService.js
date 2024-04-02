@@ -2,7 +2,6 @@ import { query } from '../db.js'
 import { deletePostByUserIdQuery, deletePostQuery } from '../postsService/queryPosts.js';
 import { deleteTodoQuery } from '../todosService/queryTodos.js';
 import { getUsersQuery,getUserByIdQuery,deleteUserQuery,updateUserQuery,addUserQuery} from './queryUsers.js'
-
 export class UsersService {
 
     async getUsers() {
