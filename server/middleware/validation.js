@@ -19,6 +19,7 @@ function phonenumberValid(inputtxt) {
     return true;
   }
 
+  
   export {phonenumberValid,emailValid,userNameValid}
 
  
