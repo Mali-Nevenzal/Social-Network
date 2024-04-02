@@ -13,7 +13,6 @@ function getPostByIdQuery() {
 
 function deletePostQuery(){
     const query=`UPDATE  ${db}.posts SET isActive=FALSE WHERE id=?;`;
-
     return query;
 }
 

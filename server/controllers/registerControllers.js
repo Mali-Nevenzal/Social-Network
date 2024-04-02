@@ -1,5 +1,5 @@
 import { RegisterService } from '../service/registerService/registerService.js';
-
+import { emailValid } from '../middleware/validation.js';
 export class RegisterController {
 
     async getRegisterByEmail(req, res) {
@@ -18,9 +18,16 @@ export class RegisterController {
 
     async addRegister(req, res) {
         try {
-            const registerService = new RegisterService();
-            await registerService.addRegister(req.body);
-            res.status(200).json({ status: 200 });
+            if(emailValid(req.body.email))
+            {
+                const registerService = new RegisterService();
+                await registerService.addRegister(req.body);
+                res.status(200).json({ status: 200 });
+            }
+            else{
+                rerr.message("EMAIL incorrect");
+                err.statusCode = 422;
+            }
         }
         catch (ex) {
             const err = {}

@@ -48,9 +48,9 @@ export class CommentsController {
 
     async deleteComment(req, res) {
         try {
-            console.log("Comment");
-            console.log(req.params.id);
-            res.status(200).json({ status: 200, data: req.params.id });
+            const commentsService = new CommentsService();
+            const resultItems = await commentsService.deleteComment(req.params.id,"id");
+            return res.status(200).json(resultItems);
         }
         catch (ex) {
             const err = {}

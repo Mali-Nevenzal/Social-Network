@@ -51,7 +51,7 @@ export default class PostsController {
         try {
 
             const postService = new PostService();
-            const resultItems = await postService.deletePost(req.params.id);
+            const resultItems = await postService.deletePost(req.params.id,"id");
             return res.status(200).json(resultItems);
         }
         catch (ex) {
