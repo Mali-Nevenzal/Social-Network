@@ -33,7 +33,6 @@ export default class UsersController {
 
     async updateUser(req, res, next) {
         try {
-
             const userService = new UsersService();
             const resultItems = await userService.updateUser(req.body);
             return res.status(200).json(resultItems);

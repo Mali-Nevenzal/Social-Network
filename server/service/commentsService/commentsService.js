@@ -30,9 +30,9 @@ export class CommentsService {
         return result;
     }
 
-    async updateUser(updatedComment) {
-        const queryComment = updateQuery("comments","body = ?");
-        const result =  await query(queryComment, [updatedComment.body,updatedUser.id]);
+    async updateComment(updatedComment) {
+        const queryComment = updateQuery("comments","body=?");
+        const result =  await query(queryComment, [updatedComment.body,updatedComment.id]);
         return result;
     }
 
