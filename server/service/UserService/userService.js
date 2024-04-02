@@ -8,13 +8,13 @@ const todoService=new TodosService();
 export class UsersService {
 
     async getUsers() {
-        const queryUsers = getQuery("users");
+        const queryUsers = getQuery("users","Where is_active=1");
         const result = await query(queryUsers);
         return result;
     }
 
     async getUserById(id) {
-        const queryUser = getByIdQuery("users","id");
+        const queryUser = getByIdQuery("users","is_active=1 AND id");
         const result =  await query(queryUser, [id]);
         return result;
     }
