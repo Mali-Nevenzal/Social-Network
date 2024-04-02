@@ -5,7 +5,8 @@ export class RegisterController {
     async getRegisterByEmail(req, res) {
         try {
             const registerService = new RegisterService();
-            const resultItem = await registerService.getRegisterByEmail(req.params.email);
+            console.log(req.query.email);
+            const resultItem = await registerService.getRegisterByEmail(req.query.email);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {
@@ -16,7 +17,7 @@ export class RegisterController {
         }
     }
 
-    async addRegister(req, res) {
+    async addRegister(req, res, next) {
         try {
             if(emailValid(req.body.email))
             {
@@ -25,13 +26,15 @@ export class RegisterController {
                 res.status(200).json({ status: 200 });
             }
             else{
-                rerr.message("EMAIL incorrect");
-                err.statusCode = 422;
+                throw("error email is not valid")
             }
         }
         catch (ex) {
             const err = {}
-            err.statusCode = 500;
+            if(ex=="error email is not valid")
+              err.statusCode = 422;
+            else
+              err.statusCode = 500;
             err.message = ex;
             next(err)
         }
@@ -41,9 +44,9 @@ export class RegisterController {
     async deleteRegister(req, res) {
         try {
             console.log("register");
-            const registerService = new TodosService();
-            await registerService.deleteRegister(req.params.email,"email");
-            return res.status(200).json({ status: 200, data: req.params.email });
+            const registerService = new RegisterService();
+            await registerService.deleteRegister(req.query.email);
+            return res.status(200).json({ status: 200, data: req.query.email });
         }
         catch (ex) {
             const err = {}
