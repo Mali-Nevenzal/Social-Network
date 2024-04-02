@@ -1,12 +1,13 @@
 import 'dotenv/config'
 const db = process.env.DB_NAME;
 
-function getQuery(table_name,whereIsActive = "") {
-    const query = `SELECT * FROM ${db}.${table_name} ${whereIsActive}`;
+function getQuery(table_name,limit,start,whereIsActive = "") {
+    const query = `SELECT * FROM ${db}.${table_name} ${whereIsActive} LIMIT ${limit} OFFSET ${start}`;
     return query
 }
-function getByIdQuery(table_name,idParameter) {
-    const query = `SELECT * FROM ${db}.${table_name}  where ${idParameter} = ?`;
+function getByIdQuery(table_name,idParameter,limit,start) {
+    console.log("in get by id query in query" );
+    const query = `SELECT * FROM ${db}.${table_name}  where ${idParameter} = ? LIMIT ${limit} OFFSET ${start}`;
     return query
 }
 function deleteQuery(table_name,idParameter){

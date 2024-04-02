@@ -52,16 +52,10 @@ export default class UsersController {
             const resultItems = await userService.getUserById(req.params.id);
             console.log(resultItems[0].email);
             const registerService=new RegisterService();
-            await registerService.deleteRegister(result[0].email);
+            await registerService.deleteRegister(resultItems[0].email);
             console.log("after delete register");
             await userService.deleteUser(req.params.id);
             return res.status(200).json({ status: 200, data: req.params.id });
-            //console.log("users");
-         
-            //const registerService=new RegisterService();
-            //await registerService.deleteRegister(result[0].email);
-           // console.log("resualt " +result);
-   
         }
         catch (ex) {
             const err = {}
