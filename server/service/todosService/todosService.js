@@ -20,12 +20,14 @@ export class TodosService {
 
     async addTodo(todoItem) {
         const queryTodos = addQuery("todos","user_id,title,completed","?,?,?");
+        console.log("mali"+todoItem)
         const result =  await query(queryTodos, [todoItem.user_id,todoItem.title,todoItem.completed]);
         return result;
     }
 
-    async deletetodo(id) {
-        const queryTodos =deleteQuery("todos","id");
+    async deletetodo(id,idParameter) {
+        console.log(idParameter);
+        const queryTodos = deleteQuery("todos",idParameter);
         const result =  await query(queryTodos, [id]);
         return result;
     }

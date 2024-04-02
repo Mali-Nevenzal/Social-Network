@@ -1,13 +1,11 @@
 
-//import {PostService} from '../service/PostsService/postsService.js'
 import { PostService } from "../service/postsService/postsService.js";
 export default class PostsController {
     async getAllPosts(req, res, next) {
         try {
-
             const postService = new PostService();
-            const resultItems = await postService.getPosts()
-            return res.status(200).json(resultItems);
+            const resultPosts = await postService.getPosts();
+            return res.status(200).json(resultPosts);
         }
         catch (ex) {
             const err = {}
@@ -23,7 +21,7 @@ export default class PostsController {
 
             const postService = new PostService();
             const resultItems = await postService.getPostById(req.params.id);
-            return res.status(200).json(resultItems);
+            return res.status(200).json({ status: 200, data: resultItems });
         }
         catch (ex) {
             const err = {}
@@ -49,10 +47,10 @@ export default class PostsController {
     }
     async deletePost(req, res, next) {
         try {
-
+            console.log("posts");
             const postService = new PostService();
-            const resultItems = await postService.deletePost(req.params.id,"id");
-            return res.status(200).json(resultItems);
+            await postService.deletePost(req.params.id,"id");
+            return res.status(200).json({ status: 200, data: req.params.id });
         }
         catch (ex) {
             const err = {}
@@ -65,8 +63,8 @@ export default class PostsController {
         try {
 
             const postService = new PostService();
-            const resultItems = await postService.addPost(req.body);
-            return res.status(200).json(resultItems);
+            await postService.addPost(req.body);
+            res.status(200).json({ status: 200 });
         }
         catch (ex) {
             const err = {}

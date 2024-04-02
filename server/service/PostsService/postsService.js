@@ -1,5 +1,8 @@
 import { query } from '../db.js'
 import {addQuery,updateQuery,getByIdQuery,getQuery,deleteByIsActiveQuery} from '../query.js'
+import { CommentsService } from '../commentsService/commentsService.js';
+
+const commentsService = new CommentsService;
 export class PostService {
 
     async getPosts() {
@@ -9,14 +12,16 @@ export class PostService {
     }
 
     async getPostById(id) {
-        const queryUser = getByIdQuery("posts","id");
-        const result =  await query(queryUser, [id]);
+        const queryPost = getByIdQuery("posts","id");
+        const result =  await query(queryPost, [id]);
         return result;
     }
-    async deletePost(id) {
-        const queryUser =deleteByIsActiveQuery("posts","id");
-        const result =  await query(queryUser, [id]);
-        await commentsServic.deleteComment(req.params.id,"post_id");
+
+    async deletePost(id,idParameter) {
+        console.log(id);
+        await commentsService.deleteComment(id,"post_id");
+        const queryPost = deleteByIsActiveQuery("posts",`${idParameter}`);
+        const result =  await query(queryPost, [id]);
         return result;
     }
 
@@ -26,8 +31,8 @@ export class PostService {
         return result;
     }
     async addPost(Post) {
-        const queryUser =addQuery("posts","user_id, title, body,isActive","?,?,?,?");
-        const result =  await query(queryUser, [Post.user_id, Post.title, Post.body,Post.isActive]);
+        const queryUser =addQuery("posts","user_id, title, body","?,?,?");
+        const result =  await query(queryUser, [Post.user_id, Post.title, Post.body]);
         return result;
     }
 
