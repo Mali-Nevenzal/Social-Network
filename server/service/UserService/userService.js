@@ -1,6 +1,5 @@
 import { query } from '../db.js'
 import { getUsersQuery,getUserByIdQuery,deleteUserQuery,updateUserQuery,addUserQuery} from './queryUsers.js'
-
 export class UsersService {
 
     async getUsers() {
@@ -15,7 +14,7 @@ export class UsersService {
         return result;
     }
     async deleteUser(id) {
-        const queryUser =deleteUserQuery();
+        const queryUser = deleteUserQuery();
         const result =  await query(queryUser, [id]);
         return result;
     }
