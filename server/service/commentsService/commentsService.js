@@ -12,8 +12,8 @@ export class CommentsService {
         return result;
     }
 
-    async getCommentById(id) {
-        const queryComment = getByIdQuery("comments","id");
+    async getCommentById(id,idParameter) {
+        const queryComment = getByIdQuery("comments",idParameter);
         const result =  await query(queryComment, [id]);
         return result;
     }
