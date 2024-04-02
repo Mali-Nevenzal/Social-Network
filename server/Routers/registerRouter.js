@@ -7,7 +7,7 @@ const registerController = new RegisterController()
 
 registerRouter.get("/:email", registerController.getRegisterByEmail)
 registerRouter.post("/", registerController.addRegister)
-registerRouter.delete("/:id", registerController.deleteRegister)
+registerRouter.delete("/:email", registerController.deleteRegister)
 
 export {
     registerRouter
