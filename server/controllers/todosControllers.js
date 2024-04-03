@@ -4,7 +4,8 @@ export class TodosController {
     async getTodos(req, res, next) {
         try {
             const todosService = new TodosService();
-            const resultItems = await todosService.getTodos()
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const resultItems = await todosService.getTodos(req.query.limit_,startIndex)
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -18,7 +19,8 @@ export class TodosController {
     async getTodoById(req, res) {
         try {
             const todosService = new TodosService();
-            const resultItem = await todosService.getTodoById(req.params.id);
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const resultItem = await todosService.getTodoById(req.params.id,req.query.limit_,startIndex);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {
