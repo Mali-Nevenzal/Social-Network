@@ -1,8 +1,9 @@
 import { RegisterService } from '../service/registerService/registerService.js';
 import { emailValid } from '../middleware/validation.js';
+import crypto from 'crypto';
 export class RegisterController {
 
-    async getRegisterByEmail(req, res) {
+    async getRegisterByEmail(req, res,next) {
         try {
             const registerService = new RegisterService();
             console.log(req.query.email);
@@ -22,13 +23,19 @@ export class RegisterController {
             if(emailValid(req.body.email))
             {
                 const registerService = new RegisterService();
+
+                let algorithm = "sha256"
+                let key = "Social-Network"
+                let digest = crypto.createHash(algorithm).update(key).digest() 
+                console.log(digest)
+                
                 await registerService.addRegister(req.body);
                 res.status(200).json({ status: 200 });
             }
             else{
                 throw("error email is not valid")
             }
-            
+
         }
         catch (ex) {
             const err = {}
