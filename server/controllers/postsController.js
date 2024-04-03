@@ -4,7 +4,7 @@ export default class PostsController {
     async getAllPosts(req, res, next) {
         try {
             const postService = new PostService();
-            const startIndex = (page - 1) * req.query.limit_;
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const resultPosts = await postService.getPosts(req.query.limit_,startIndex);
             return res.status(200).json(resultPosts);
         }
@@ -21,7 +21,8 @@ export default class PostsController {
         try {
 
             const postService = new PostService();
-            const resultItems = await postService.getPostById(req.params.id);
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const resultItems = await postService.getPostById(req.params.id,req.query.limit_,startIndex);
             return res.status(200).json({ status: 200, data: resultItems });
         }
         catch (ex) {

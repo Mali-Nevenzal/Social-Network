@@ -5,7 +5,8 @@ export default class UsersController {
         try {
 
             const userService = new UsersService();
-            const resultItems = await userService.getUsers()
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const resultItems = await userService.getUsers(req.query.limit_,startIndex);
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -19,9 +20,9 @@ export default class UsersController {
     
     async getUserById(req, res, next) {
         try {
-
             const userService = new UsersService();
-            const resultItems = await userService.getUserById(req.params.id);
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const resultItems = await userService.getUserById(req.params.id,req.query.limit_,startIndex);
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -53,7 +54,6 @@ export default class UsersController {
             console.log(resultItems[0].email);
             const registerService=new RegisterService();
             await registerService.deleteRegister(resultItems[0].email);
-            console.log("after delete register");
             await userService.deleteUser(req.params.id);
             return res.status(200).json({ status: 200, data: req.params.id });
         }

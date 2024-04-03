@@ -5,14 +5,13 @@ import { CommentsService } from '../commentsService/commentsService.js';
 const commentsService = new CommentsService;
 export class PostService {
 
-    async getPosts() {
-        const queryUsers = getQuery("posts" ,"Where is_active=1");
+    async getPosts(limit,start) {
+        const queryUsers = getQuery("posts",limit,start ,"Where is_active=1");
         const result = await query(queryUsers);
         return result;
     }
-
-    async getPostById(id) {
-        const queryPost = getByIdQuery("posts","is_active=1 AND id");
+    async getPostById(id,limit,start) {
+        const queryPost = getByIdQuery("posts","is_active=1 AND id",limit,start);
         const result =  await query(queryPost, [id]);
         return result;
     }
