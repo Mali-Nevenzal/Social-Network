@@ -6,7 +6,10 @@ export class CommentsController {
         try {
             const commentsService = new CommentsService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItems = await commentsService.getComments(req.query.limit_,startIndex,"post_id")
+            let resultItems = await commentsService.getComments(req.query.limit_,startIndex,"post_id");
+            //resultItems=commentsService.sortComments(resultItems, req.query.sort_);       
+             //console.log("after sorting "+resultItems);
+
             return res.status(200).json(resultItems);
         }
         catch (ex) {

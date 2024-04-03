@@ -51,7 +51,6 @@ export default class UsersController {
             console.log("users");
             const userService = new UsersService();
             const resultItems = await userService.getUserById(req.params.id);
-            console.log(resultItems[0].email);
             const registerService=new RegisterService();
             await registerService.deleteRegister(resultItems[0].email);
             await userService.deleteUser(req.params.id);

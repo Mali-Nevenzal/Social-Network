@@ -7,9 +7,7 @@ import {addQuery,updateQuery,deleteQuery,getByIdQuery,getQuery} from '../query.j
 export class CommentsService {
 
     async getComments(limit,start) {
-        console.log("in commentService at getComments");
         const queryComments = getQuery("comments",limit,start);
-        console.log("query commants: "+ queryComments);
         const result = await query(queryComments);
         return result;
     }
@@ -38,7 +36,31 @@ export class CommentsService {
         const result =  await query(queryComment, [updatedComment.body,updatedComment.id]);
         return result;
     }
+    
+    async sortComments(comments, sortParam) {
+        let sortedComments;
 
+        if (sortParam) {
+            switch (sortParam) {
+                case 'name':
+                    sortedComments = comments.slice().sort((a, b) => a[0].name.localeCompare(b[0].name));
+                    break;
+                case 'post_id':
+                    sortedComments = comments.slice().sort((a, b) => a[0].post_id .localeCompare(b[0].post_id));
+                    break;
+                case 'id':
+                    sortedComments = comments.slice().sort((a, b) => a[0].id .localeCompare(b[0].id));
+                     break;
+                default:
+                    return res.status(400).json({ error: 'Invalid sort parameter' });
+            }
+        } else {
+            console.log( "in else sort in comments service "+comments[0].id)
+            return comments;
+        }
+        console.log("in sort comment in comments service "+comments[0].id);
+        return sortedComments;
+    }
 }
 
 
