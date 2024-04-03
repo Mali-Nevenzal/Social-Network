@@ -7,7 +7,8 @@ export class RegisterController {
         try {
             const registerService = new RegisterService();
             console.log(req.query.email);
-            const resultItem = await registerService.getRegisterByEmail(req.query.email);
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const resultItem = await registerService.getRegisterByEmail(req.query.email,req.query.limit_,startIndex);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {

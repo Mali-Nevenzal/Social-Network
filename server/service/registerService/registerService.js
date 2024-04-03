@@ -5,8 +5,8 @@ import {addQuery,deleteQuery,getByIdQuery} from '../query.js'
 export class RegisterService {
 
 
-    async getRegisterByEmail(email) {
-        const queryRegister = getByIdQuery("register","email");
+    async getRegisterByEmail(email,limit,start) {
+        const queryRegister = getByIdQuery("register","email",limit,start);
         const result =  await query(queryRegister, [email]);
         return result;
     }
