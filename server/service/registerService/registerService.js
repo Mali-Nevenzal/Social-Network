@@ -11,9 +11,9 @@ export class RegisterService {
         return result;
     }
 
-    async addRegister(user) {
+    async addRegister(email,password) {
         const queryRegister = addQuery("register","email,password","?,?");
-        const result =  await query(queryRegister, [user.email,user.password]);
+        const result =  await query(queryRegister, [email,password]);
         return result;
     }
 
