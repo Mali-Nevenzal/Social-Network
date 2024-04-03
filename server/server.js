@@ -10,11 +10,26 @@ import cors from 'cors';
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use((req, res, next) => {
+    const limit = parseInt(req.query.limit_);
+    const page = parseInt(req.query.page_);
+    if (limit && !isNaN(limit)) {
+      req.query.limit_ = limit;
+    } else {
+      req.query.limit_ = 10; // Default limit if not specified or invalid
+    }
+    req.query.page_ = page || 1; // Default page is 1 if not specified
+    next();
+  });
+  
 app.use('/users/', usersRouter);
 app.use('/posts/', postsRouter);
 app.use('/todos/', todosRouter);
 app.use('/comments/', commentsRouter);
 app.use('/register/', registerRouter);
+
+
 
 app.use(logErrors);
 

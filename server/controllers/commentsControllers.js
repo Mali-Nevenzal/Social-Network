@@ -5,8 +5,8 @@ export class CommentsController {
     async getComments(req, res, next) {
         try {
             const commentsService = new CommentsService();
-            console.log(req.query.post_id);
-            const resultItems = await commentsService.getCommentById(req.query.post_id,"post_id")
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const resultItems = await commentsService.getComments(req.query.limit_,startIndex,"post_id")
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -20,7 +20,8 @@ export class CommentsController {
     async getCommentById(req, res) {
         try {
             const commentsService = new CommentsService();
-            const resultItem = await commentsService.getCommentById(req.params.id,"id");
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const resultItem = await commentsService.getCommentById(req.params.id,req.query.limit_,startIndex,"id");
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {

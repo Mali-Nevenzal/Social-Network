@@ -18,8 +18,8 @@ export class RegisterService {
     }
 
     async deleteRegister(email) {
+        console.log("in delete register before delete");
         const queryRegister = deleteQuery("register","email");
-        console.log("in delete register before delete")
         const result =  await query(queryRegister, [email]);
         console.log("in registers service in delete register, email: "+ email);
         return result;
