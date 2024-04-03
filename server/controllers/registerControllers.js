@@ -28,6 +28,7 @@ export class RegisterController {
             else{
                 throw("error email is not valid")
             }
+            
         }
         catch (ex) {
             const err = {}
