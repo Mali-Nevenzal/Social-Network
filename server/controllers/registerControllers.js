@@ -58,7 +58,7 @@ export class RegisterController {
                 }
             }
             else{
-                throw("Your details are incorrect");
+                res.status(500).json({ status: 500});
             }
 
         }
