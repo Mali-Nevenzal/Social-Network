@@ -1,5 +1,7 @@
 import {UsersService} from '../service/UserService/userService.js'
 import { RegisterService } from '../service/registerService/registerService.js';
+import {phonenumberValid,emailValid,userNameValid} from '../middleware/validation.js'
+
 export default class UsersController {
     async getAllUsers(req, res, next) {
         try {
@@ -36,6 +38,8 @@ export default class UsersController {
     async updateUser(req, res, next) {
         try {
             const userService = new UsersService();
+            if(!phonenumberValid(req.body.phone)||!userNameValid(req.body.username)||!emailValid(req.body.email))
+              throw("not valid params");
             const resultItems = await userService.updateUser(req.body);
             return res.status(200).json(resultItems);
         }
@@ -49,8 +53,10 @@ export default class UsersController {
     async deleteUser(req, res, next) {
         try {
             console.log("users");
+            console.log(req.params.id);
             const userService = new UsersService();
             const resultItems = await userService.getUserById(req.params.id);
+            console.log(resultItems[0])
             const registerService=new RegisterService();
             await registerService.deleteRegister(resultItems[0].email);
             await userService.deleteUser(req.params.id);
@@ -67,6 +73,8 @@ export default class UsersController {
         try {
             console.log(req.body);
             const userService = new UsersService();
+            if(!phonenumberValid(req.body.phone)||!userNameValid(req.body.username)||!emailValid(req.body.email))
+                throw("not valid params");
             await userService.addUser(req.body);
             res.status(200).json({status: 200});
         }

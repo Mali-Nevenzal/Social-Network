@@ -1,5 +1,4 @@
 import { query } from '../db.js'
-import {phonenumberValid,emailValid,userNameValid} from '../../middleware/validation.js'
 import {addQuery,updateQuery,getByIdQuery,getQuery, deleteByIsActiveQuery} from '../query.js'
 import {PostService} from '../PostsService/postsService.js';
 import {TodosService} from '../todosService/todosService.js'
@@ -13,7 +12,7 @@ export class UsersService {
         return result;
     }
 
-    async getUserById(id,limit,start) {
+    async getUserById(id,limit=100,start=0) {
         const queryUser = getByIdQuery("users","is_active=1 AND id",limit,start);
         const result =  await query(queryUser, [id]);
         return result;
@@ -36,8 +35,6 @@ export class UsersService {
         const queryUser =addQuery("users","name, username, email, phone","?,?,?,?");
         console.log("in user service add user");
         console.log(User.name+User.username+User.email+User.phone);
-        // if(!phonenumberValid(User.phone)||!userNameValid(User.username)||!emailValid(User.email))
-        //     throw("not valid params");
         const result =  await query(queryUser, [User.name,User.username, User.email,User.phone]);
         return result;
     }

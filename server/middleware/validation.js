@@ -7,7 +7,7 @@ function emailValid(email)
 
 function phonenumberValid(inputtxt) {
     var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
-    if(inputtxt.value.match(phoneno)) 
+    if(inputtxt.match(phoneno)) 
       return true;
     return false;
   }
