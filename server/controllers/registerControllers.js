@@ -46,7 +46,7 @@ export class RegisterController {
             const registerService = new RegisterService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex);
-            if(!resultItem)
+            if(resultItem[0])
             {
                 let algorithm = "sha256";
                 let key = req.body.password;
