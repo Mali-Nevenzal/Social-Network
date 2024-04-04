@@ -19,7 +19,7 @@ const TodoUpdate = ({ todos, setTodos, setCommentArea, todoToUpdate }) => {
 
     const updateTodoRequest = (key, newValue) => {
         const updatedField = { [key]: newValue };
-        fetch(`http://localhost:3000/todos/${todoToUpdate.id}`, {
+        fetch(`http://localhost:8080/todos/${todoToUpdate.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

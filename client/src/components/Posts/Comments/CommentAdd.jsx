@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { runId } from '../../Tools';
 
 const CommentAdd = ({ comments, setComments, postId, setCommentArea }) => {
     const [inAddition, setInAddition] = useState(false);
@@ -17,9 +16,8 @@ const CommentAdd = ({ comments, setComments, postId, setCommentArea }) => {
     const AddPost = async (e) => {
         e.preventDefault();
         setInAddition(false);
-        const newId = await runId("nextCommentId");
-        const newComment = { postId: postId, id: newId, name: newName, email: userEmail, body: newBody }
-        fetch('http://localhost:3000/comments', {
+        const newComment = { postId: postId, name: newName, email: userEmail, body: newBody }
+        fetch('http://localhost:8080/comments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ const Comments = ({ postId }) => {
     }, [])
 
     const requestPostsComments = () => {
-        fetch(`http://localhost:3000/comments/?postId=${Number(postId)}`)
+        fetch(`http://localhost:8080/comments/${Number(postId)}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status: ${response.status}`);

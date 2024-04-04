@@ -13,7 +13,7 @@ const Posts = () => {
     }, [])
 
     const requestPosts = () => {
-        fetch(`http://localhost:3000/posts`)
+        fetch(`http://localhost:8080/posts`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status: ${response.status}`);

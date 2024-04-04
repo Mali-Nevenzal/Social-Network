@@ -5,7 +5,7 @@ const TodoRemove = ({ todos, setTodos, setCommentArea, todo }) => {
         e.preventDefault();
         const idToDelete = todo.id;
 
-        fetch(`http://localhost:3000/todos/${idToDelete}`, {
+        fetch(`http://localhost:8080/todos/${idToDelete}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

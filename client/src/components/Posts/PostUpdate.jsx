@@ -6,7 +6,7 @@ const PostUpdate = ({ postToUpdate, setPosts, posts, updatedTitle, updatedBody, 
         if (postToUpdate.title === updatedTitle && postToUpdate.body === updatedBody)
             return;
         const updatedFields = { title: updatedTitle, body: updatedBody };
-        fetch(`http://localhost:3000/posts/${postToUpdate.id}`, {
+        fetch(`http://localhost:8080/posts/${postToUpdate.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

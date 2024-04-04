@@ -7,7 +7,7 @@ const PostRemove = ({ postToRemove, setPosts, posts, setCommentArea }) => {
     }
 
     const getPostsCommentsIds = () => {
-        fetch(`http://localhost:3000/comments/?postId=${Number(idToDelete)}`)
+        fetch(`http://localhost:8080/comments/?postId=${Number(idToDelete)}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status: ${response.status}`);

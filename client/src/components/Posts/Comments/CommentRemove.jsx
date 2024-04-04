@@ -3,7 +3,7 @@ const CommentRemove = ({ commentToRemove, setCommentArea, setComments, comments 
 
     const removeComment = () => {
         const idToDelete = commentToRemove.id;
-        fetch(`http://localhost:3000/comments/${idToDelete}`, {
+        fetch(`http://localhost:8080/comments/${idToDelete}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

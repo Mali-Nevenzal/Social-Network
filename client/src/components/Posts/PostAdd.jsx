@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { runId } from "../Tools";
 
 const PostAdd = ({ setPosts, posts, setCommentArea }) => {
     const [inAddition, setInAddition] = useState(false);
@@ -17,9 +16,8 @@ const PostAdd = ({ setPosts, posts, setCommentArea }) => {
     const AddPost = async (e) => {
         e.preventDefault();
         setInAddition(false);
-        const newId = await runId("nextPostId");
-        const newPost = { userId: userId, id: newId, title: newTitle, body: newBody }
-        fetch('http://localhost:3000/posts', {
+        const newPost = { userId: userId, title: newTitle, body: newBody }
+        fetch('http://localhost:8080/posts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

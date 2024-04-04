@@ -13,7 +13,7 @@ const Todos = () => {
     }, [])
 
     const requestUserTodos = () => {
-        fetch(`http://localhost:3000/todos/?userId=${Number(userId)}`)
+        fetch(`http://localhost:8080/todos/${Number(userId)}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status: ${response.status}`);

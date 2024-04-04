@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { runId } from "../Tools";
 
 const TodoAdd = ({ todos, setTodos, setCommentArea }) => {
     const [inAddition, setInAddition] = useState(false);
@@ -14,9 +13,8 @@ const TodoAdd = ({ todos, setTodos, setCommentArea }) => {
     const AddTodo = async (e) => {
         e.preventDefault();
         setInAddition(false);
-        const newId = await runId("nextTodoId");
-        const newTodo = { userId: userId, id: newId, title: newTitle, completed: false }
-        fetch('http://localhost:3000/todos', {
+        const newTodo = { userId: userId, title: newTitle, completed: false }
+        fetch('http://localhost:8080/todos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

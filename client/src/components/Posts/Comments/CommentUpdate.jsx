@@ -6,7 +6,7 @@ const CommentUpdate = ({ setInUpdate, commentToUpdate, setCommentArea, setCommen
         if (commentToUpdate.name === updatedName && commentToUpdate.body === updatedBody)
             return;
         const updatedFields = { name: updatedName, body: updatedBody };
-        fetch(`http://localhost:3000/comments/${commentToUpdate.id}`, {
+        fetch(`http://localhost:8080/comments/${commentToUpdate.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
