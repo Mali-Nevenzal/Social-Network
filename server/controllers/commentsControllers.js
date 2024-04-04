@@ -24,7 +24,10 @@ export class CommentsController {
         try {
             const commentsService = new CommentsService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItem = await commentsService.getCommentById(req.params.id,req.query.limit_,startIndex,"id");
+            const resultItem = await commentsService.getCommentById(req.params.id,req.query.limit_,startIndex,"post_id");
+            // "data": {
+            //     "insertId": 123
+            //   }
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {

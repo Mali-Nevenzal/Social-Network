@@ -11,7 +11,7 @@ export class TodosService {
     }
 
     async getTodoById(id,limit,start) {
-        const queryTodos = getByIdQuery("todos","user_id",limit,start);
+        const queryTodos = getByIdQuery("todos","id",limit,start);
         const result =  await query(queryTodos, [id]);
         return result;
     }

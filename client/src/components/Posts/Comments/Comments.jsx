@@ -23,7 +23,7 @@ const Comments = ({ postId }) => {
                 if (Object.keys(data).length === 0) {
                     setCommentArea("This post has no comments.");
                 } else {
-                    setComments(data);
+                    setComments(data.data);
                 }
             })
             .catch(error => {

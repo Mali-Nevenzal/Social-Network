@@ -25,9 +25,13 @@ const TodoAdd = ({ todos, setTodos, setCommentArea }) => {
                 throw new Error(`Request failed with status: ${response.status}`);
             }
            // delete newTodo["userId"];
-           const result = response;
-           const todoId=result.json().data;
-           //newTodo.id=todoId;
+        //    const result = response.data;
+         //let todoId=response.json;
+        //  console.log(response.status);
+        //  console.log(response.insertId);
+
+          const todoId=response.json();
+           newTodo.id=todoId.insertId;
             setTodos([...todos, newTodo]);
             setCommentArea("");
         }).catch(error => {

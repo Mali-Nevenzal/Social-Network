@@ -15,7 +15,7 @@ const CommentDisplay = ({ comment, comments, setComments }) => {
     setUpdatedName(comment.name);
   }, [inUpdate]);
 
-  const { postId, ...rest } = comment;
+  const { post_id, ...rest } = comment;
   return (<>
     <ul>
       {Object.keys(rest).map(key => (

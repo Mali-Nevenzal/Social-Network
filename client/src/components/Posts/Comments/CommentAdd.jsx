@@ -16,7 +16,7 @@ const CommentAdd = ({ comments, setComments, postId, setCommentArea }) => {
     const AddPost = async (e) => {
         e.preventDefault();
         setInAddition(false);
-        const newComment = { postId: postId, name: newName, email: userEmail, body: newBody }
+        const newComment = { post_id: postId, name: newName, email: userEmail, body: newBody }
         fetch('http://localhost:8080/comments', {
             method: 'POST',
             headers: {
@@ -41,8 +41,10 @@ const CommentAdd = ({ comments, setComments, postId, setCommentArea }) => {
             <form onSubmit={AddPost}>
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" value={newName} onChange={(event) => { setNewName(event.target.value) }} required />
+              <br/>
                 <label htmlFor="body">body:</label>
                 <input type="text" id="body" value={newBody} onChange={(event) => { setNewBody(event.target.value) }} required />
+               <br/>
                 <button className="actionButton" type="submit">Add</button>
             </form>
         )}

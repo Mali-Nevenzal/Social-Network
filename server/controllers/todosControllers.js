@@ -2,12 +2,14 @@ import {TodosService} from '../service/todosService/todosService.js'
 export class TodosController {
 
     async getTodos(req, res, next) {
-        try {
-            const todosService = new TodosService();
-            const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItems = await todosService.getTodos(req.query.userId,req.query.limit_,startIndex)
-            return res.status(200).json(resultItems);
-        }
+      
+            try {
+                const todosService = new TodosService();
+                const startIndex = (req.query.page_ - 1) * req.query.limit_;
+                const resultItems = await todosService.getTodos(req.query.userId,req.query.limit_,startIndex)
+                return res.status(200).json(resultItems);
+            }
+        
         catch (ex) {
             const err = {}
             err.statusCode = 500;
@@ -38,7 +40,8 @@ export class TodosController {
             console.log(req.body)
             const resultItem = await todosService.addTodo(req.body);
             console.log(resultItem);
-            res.status(200).json({ status: 200, data: resultItem.insertId });
+
+            return res.status(200).json({insertId:resultItem.insertId});
         }
         catch (ex) {
             const err = {}

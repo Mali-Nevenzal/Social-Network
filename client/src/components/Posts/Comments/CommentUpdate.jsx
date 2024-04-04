@@ -5,9 +5,9 @@ const CommentUpdate = ({ setInUpdate, commentToUpdate, setCommentArea, setCommen
         setInUpdate(false);
         if (commentToUpdate.name === updatedName && commentToUpdate.body === updatedBody)
             return;
-        const updatedFields = { name: updatedName, body: updatedBody };
+        const updatedFields = { name: updatedName, body: updatedBody ,post_id: commentToUpdate.post_id,id:commentToUpdate.id};
         fetch(`http://localhost:8080/comments/${commentToUpdate.id}`, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
