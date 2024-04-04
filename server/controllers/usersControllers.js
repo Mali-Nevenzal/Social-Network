@@ -75,8 +75,8 @@ export default class UsersController {
             const userService = new UsersService();
             if(!phonenumberValid(req.body.phone)||!userNameValid(req.body.username)||!emailValid(req.body.email))
                 throw("not valid params");
-            await userService.addUser(req.body);
-            res.status(200).json({status: 200});
+            const resultItem = await userService.addUser(req.body);
+            res.status(200).json({ status: 200, data: resultItem.insertId });
         }
         catch (ex) {
             const err = {}

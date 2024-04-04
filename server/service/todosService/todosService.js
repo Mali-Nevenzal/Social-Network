@@ -17,10 +17,10 @@ export class TodosService {
     }
 
     async addTodo(todoItem) {
+        console.log("todoItem:  "+todoItem.user_id);
         const queryTodos = addQuery("todos","user_id,title,completed","?,?,?");
-        console.log("mali "+todoItem)
         const result =  await query(queryTodos, [todoItem.user_id,todoItem.title,todoItem.completed]);
-        console.log("add to do resualt" +result);
+        console.log("result:   "+result)
         return result;
     }
 

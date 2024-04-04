@@ -5,7 +5,7 @@ export class TodosController {
         try {
             const todosService = new TodosService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItems = await todosService.getTodos(req.params.userId,req.query.limit_,startIndex)
+            const resultItems = await todosService.getTodos(req.query.userId,req.query.limit_,startIndex)
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -16,7 +16,7 @@ export class TodosController {
         }
     }
 
-    async getTodoById(req, res) {
+    async getTodoById(req, res,next) {
         try {
             const todosService = new TodosService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
@@ -32,11 +32,13 @@ export class TodosController {
     }
 
 
-    async addTodo(req, res) {
+    async addTodo(req, res,next) {
         try {
             const todosService = new TodosService();
-            await todosService.addTodo(req.body);
-            res.status(200).json({ status: 200 });
+            console.log(req.body)
+            const resultItem = await todosService.addTodo(req.body);
+            console.log(resultItem);
+            res.status(200).json({ status: 200, data: resultItem.insertId });
         }
         catch (ex) {
             const err = {}
@@ -47,7 +49,7 @@ export class TodosController {
     }
 
 
-    async deleteTodo(req, res) {
+    async deleteTodo(req, res, next) {
         try {
             console.log("todos");
             const todoService = new TodosService();
@@ -63,7 +65,7 @@ export class TodosController {
     }
 
     
-    async updateTodo(req, res) {
+    async updateTodo(req, res,next) {
         try {
             const todoService = new TodosService();
             await todoService.updateTodo(req.body);

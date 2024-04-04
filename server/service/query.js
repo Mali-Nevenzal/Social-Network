@@ -19,6 +19,7 @@ function updateQuery(table_name,values){
 }
 function addQuery(table_name,values,columnsNum){
     const query=`INSERT INTO ${db}.${table_name} (${values}) VALUES (${columnsNum})`;
+    console.log("query:  "+ query);
     return query;
 }
 function deleteByIsActiveQuery(table_name,idParameter){
