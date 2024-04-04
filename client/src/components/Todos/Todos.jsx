@@ -24,8 +24,8 @@ const Todos = () => {
                 if (Object.keys(data).length === 0) {
                     setCommentArea("You have no todos.");
                 } else {
-                    data.map(todo => (delete todo["userId"]))
-                    setTodos(data);
+                    //data.map(todo => (delete todo["userId"]))
+                    setTodos((todos)=>[...todos,data.data[0]]);
                 }
             })
             .catch(error => {
