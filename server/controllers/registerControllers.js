@@ -46,7 +46,7 @@ export class RegisterController {
             const registerService = new RegisterService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex);
-            if(resultItem[0].username===req.body.username)
+            if(!resultItem)
             {
                 let algorithm = "sha256";
                 let key = req.body.password;
@@ -55,6 +55,9 @@ export class RegisterController {
                 {
                     console.log(resultItem[0].username)
                     res.status(200).json({ status: 200});
+                }
+                else{
+                    res.status(500).json({ status: 500});
                 }
             }
             else{
