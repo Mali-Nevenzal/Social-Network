@@ -5,7 +5,7 @@ export class TodosController {
         try {
             const todosService = new TodosService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItems = await todosService.getTodos(req.query.limit_,startIndex)
+            const resultItems = await todosService.getTodos(req.params.userId,req.query.limit_,startIndex)
             return res.status(200).json(resultItems);
         }
         catch (ex) {
