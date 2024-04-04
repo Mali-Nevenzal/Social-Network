@@ -4,9 +4,9 @@ import {addQuery,updateQuery,deleteQuery,getByIdQuery,getQuery} from '../query.j
 
 export class TodosService {
 
-    async getTodos(limit,start) {
-        const queryTodos = getQuery("todos",limit,start);
-        const result = await query(queryTodos);
+    async getTodos(userId,limit,start) {
+        const queryTodos = getByIdQuery("todos","user_id",limit,start);
+        const result = await query(queryTodos,[userId]);
         return result;
     }
 
