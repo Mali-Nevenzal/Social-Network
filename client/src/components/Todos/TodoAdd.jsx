@@ -24,7 +24,12 @@ const TodoAdd = ({ todos, setTodos, setCommentArea }) => {
             if (!response.ok) {
                 throw new Error(`Request failed with status: ${response.status}`);
             }
-            delete newTodo["userId"];
+           // delete newTodo["userId"];
+           console.log("response "+response)
+           console.log("response "+response.json());
+
+           const todoId=response.json()[0].id;
+           newTodo.id=todoId;
             setTodos([...todos, newTodo]);
             setCommentArea("");
         }).catch(error => {

@@ -22,33 +22,59 @@ export const displayObject = (obj, parentKey = '') => {
 
 import { React, useState } from "react";
 import {config} from "./config.jsx";
-export const GetRequest= async (id, state, comment, table)=>
- {
-  console.log("in get reqest")
-    fetch(`http://${config.SERVERPORT}/${table}/${id}`)
-        .then(response => {
-          console.log("after fetch response "+response)
-            if (!response.status===200) {
-              console.log("response.status "+response.status)
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
-            console.log("in get request response.json(): "+response);
-            return response;
-        })
-        .then(data => {
-          console.log("after json: "+ data)
-            if (Object.keys(data).length === 0) {
-                comment(`there is no ${table} with such id.`)
-            }
-            else {
-              console.log("in get users by id "+data[0]);
-                state(data[0]);
-            }
-        })
-        .catch(error => {
-            comment(`Server error:${error}`)
-        });
-}
+export const GetRequest = async (id, state, comment, table) => {
+  try {
+    console.log("in get request");
+    const response = await fetch(`http://${config.SERVERPORT}/${table}/${id}`);
+    
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (Object.keys(data).length === 0) {
+      comment(`There is no ${table} with such id.`);
+      return false;
+    } else {
+      console.log("in get users by id ", data[0]);
+      state(data[0]);
+      return true;
+    }
+  } catch (error) {
+    console.error("Error in GetRequest:", error);
+    comment(`Server error: ${error}`);
+    return false;
+  }
+};
+
+// export const GetRequest= async (id, state, comment, table)=>
+//  {
+//   console.log("in get reqest")
+//     fetch(`http://${config.SERVERPORT}/${table}/${id}`)
+//         .then(response => {
+//           console.log("after fetch response "+response)
+//             if (!response.status===200) {
+//               console.log("response.status "+response.status)
+//                 throw new Error(`Request failed with status: ${response.status}`);
+//             }
+//             console.log("in get request response.json(): "+response);
+//             return response;
+//         })
+//         .then(data => {
+//           console.log("after json: "+ data)
+//             if (Object.keys(data).length === 0) {
+//                 comment(`there is no ${table} with such id.`)
+//             }
+//             else {
+//               console.log("in get users by id "+data[0]);
+//                 state(data[0]);
+//             }
+//         })
+//         .catch(error => {
+//             comment(`Server error:${error}`)
+//         });
+// }
 
 export const GetAllRequest = async(state, comment, table) => {
   fetch(`http://${config.SERVERPORT}/${table}`)
@@ -117,23 +143,44 @@ export const DeleteRequest =async  (state, comment, id,table) => {
           comment(`Server error:${error}.`)
       });
 }
+// export const CreateRequest = async (comment, table, newMember) => {
+//   fetch(`http://${config.SERVERPORT}/${table}`, {
+//       headers: { 'Content-Type': 'application/json' },
+//       method: 'POST',
+//       body: JSON.stringify(newMember)
+//   })
+//       .then(response => {
+//           if (!response.ok) {      
+//               throw new Error(`Request failed with status: ${response.status}`);
+//           }
+//           console.log(" response.json() : "+response.status);
+//           return true;
+//       })
+//       .catch(error => {
+//           comment('An error occurred while creating');
+//           return false;
+
+//       });
+// }
 export const CreateRequest = async (comment, table, newMember) => {
-  fetch(`http://${config.SERVERPORT}/${table}`, {
+  try {
+    const response = await fetch(`http://${config.SERVERPORT}/${table}`, {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify(newMember)
-  })
-      .then(response => {
-          if (!response.ok) {      
-              throw new Error(`Request failed with status: ${response.status}`);
-          }
-          console.log(" response.json() : "+response.status);
-          return true;
-      })
-      .catch(error => {
-          comment('An error occurred while creating');
-          return false;
+    });
 
-      });
-}
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    console.log(" response.json() : " + response.status);
+    return true; // Return true if the request is successful
+  } catch (error) {
+    console.error("Error creating request:", error);
+    comment('An error occurred while creating');
+    return false; // Return false if an error occurs
+  }
+};
+
 //export{GetRequest,GetAllRequest,UpdateRequest,DeleteRequest,CreateRequest}
