@@ -1,7 +1,5 @@
 
 import { query } from '../db.js';
-import { getTodosQuery ,getTodoByIdQuery,addTodoQuery} from './queryTodos.js'
-import { deleteTodoQuery ,updateTodoQuery} from './queryTodos.js'
 import {addQuery,updateQuery,deleteQuery,getByIdQuery,getQuery} from '../query.js'
 
 export class TodosService {
