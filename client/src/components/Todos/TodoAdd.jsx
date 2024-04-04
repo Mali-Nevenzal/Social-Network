@@ -13,7 +13,7 @@ const TodoAdd = ({ todos, setTodos, setCommentArea }) => {
     const AddTodo = async (e) => {
         e.preventDefault();
         setInAddition(false);
-        const newTodo = { userId: userId, title: newTitle, completed: false }
+        const newTodo = { user_id: userId, title: newTitle, completed: false }
         fetch('http://localhost:8080/todos', {
             method: 'POST',
             headers: {
@@ -25,10 +25,9 @@ const TodoAdd = ({ todos, setTodos, setCommentArea }) => {
                 throw new Error(`Request failed with status: ${response.status}`);
             }
            // delete newTodo["userId"];
-           console.log("response "+response)
-           console.log("response "+response.json());
-           const todoId=response.json()[0].id;
-           newTodo.id=todoId;
+           const result = response;
+           const todoId=result.json().data;
+           //newTodo.id=todoId;
             setTodos([...todos, newTodo]);
             setCommentArea("");
         }).catch(error => {

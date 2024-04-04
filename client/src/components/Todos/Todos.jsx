@@ -13,7 +13,7 @@ const Todos = () => {
     }, [])
 
     const requestUserTodos = () => {
-        fetch(`http://localhost:8080/todos/${Number(userId)}`)
+        fetch(`http://localhost:8080/todos?userId=${Number(userId)}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Request failed with status: ${response.status}`);
@@ -25,7 +25,7 @@ const Todos = () => {
                     setCommentArea("You have no todos.");
                 } else {
                     //data.map(todo => (delete todo["userId"]))
-                    setTodos((todos)=>[...todos,data.data[0]]);
+                    setTodos((todos)=>[...todos,data]);
                 }
             })
             .catch(error => {
