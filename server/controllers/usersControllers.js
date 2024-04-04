@@ -20,11 +20,11 @@ export default class UsersController {
 
     }
     
-    async getUserById(req, res, next) {
+    async getUserByUsername(req, res, next) {
         try {
             const userService = new UsersService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItems = await userService.getUserById(req.params.id,req.query.limit_,startIndex);
+            const resultItems = await userService.getUserByUsername(req.params.username,req.query.limit_,startIndex);
             return res.status(200).json(resultItems);
         }
         catch (ex) {

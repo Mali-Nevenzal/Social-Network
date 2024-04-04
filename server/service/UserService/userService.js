@@ -12,9 +12,9 @@ export class UsersService {
         return result;
     }
 
-    async getUserById(id,limit=100,start=0) {
-        const queryUser = getByIdQuery("users","is_active=1 AND id",limit,start);
-        const result =  await query(queryUser, [id]);
+    async getUserByUsername(username,limit=100,start=0) {
+        const queryUser = getByIdQuery("users","is_active=1 AND username",limit,start);
+        const result =  await query(queryUser, [username]);
         return result;
     }
 
