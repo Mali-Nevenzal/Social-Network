@@ -1,8 +1,7 @@
 
 import { query } from '../db.js';
-import {updateCommentQuery,deleteCommentQuery,addCommentQuery,deleteCommentByPostIdQuery} from './queryComments.js'
-import {getCommentByIdQuery,getCommentsQuery} from './queryComments.js'
-import {addQuery,updateQuery,deleteQuery,getByIdQuery,getQuery} from '../query.js'
+import {addQuery,updateQuery,deleteQuery,getByIdQuery,getQuery} from '../query.js';
+
 
 export class CommentsService {
 
@@ -21,6 +20,7 @@ export class CommentsService {
 
     async addComment(commentItem) {
         const queryComments = addQuery("comments","post_id,name,email,body","?,?,?,?");
+        
         const result =  await query(queryComments, [commentItem.post_id,commentItem.name,commentItem.email,commentItem.body]);
         return result;
     }
@@ -36,7 +36,7 @@ export class CommentsService {
         const result =  await query(queryComment, [updatedComment.body,updatedComment.id]);
         return result;
     }
-    
+
     async sortComments(comments, sortParam) {
         let sortedComments;
 
