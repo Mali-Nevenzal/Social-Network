@@ -21,11 +21,11 @@ const PostsDisplay = ({ posts, setPosts }) => {
     const isFiltered = (post) => {
         switch (filterOption) {
             case "My Posts":
-                return post.userId === userId;
+                return post.user_id === Number(userId);
             case "All":
                 return true;
             case "User Id":
-                return post.userId.includes(selectedUserId);
+                return post.user_id.includes(selectedUserId);
             case "Id":
                 return post.id.includes(selectedId);
             case "Title":

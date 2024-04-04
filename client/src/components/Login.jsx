@@ -26,14 +26,7 @@ export default function Login( ) {
           }
     }
   };
-  // const isUserExist = async (usernameValue, passwordValue) => {
-  //     CreateRequest(setCommentArea, "register", { username: usernameValue, password: passwordValue }).then(newUser=>{
-  //     if (newUser) {           GetRequest(usernameValue, setUser, setCommentArea, "users").then(response=>{
-  //            if (response) {
-  //           localStorage.setItem("currentUser", JSON.stringify(user));
-  //           navigate(`/users/${user.id}/home`);  
-  //         }})} ;})};
- 
+
   
 
   const handleSubmit = (e) => {

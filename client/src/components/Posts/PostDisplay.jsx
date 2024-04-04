@@ -12,7 +12,7 @@ const PostDisplay = ({ postToDisplay, setPosts, posts, filterOption }) => {
     const [updatedTitle, setUpdatedTitle] = useState(postToDisplay.title);
     const [updatedBody, setUpdatedBody] = useState(postToDisplay.body);
     const [inUpdate, setInUpdate] = useState(false);
-    const [commentArea, setCommentArea] = useState("")
+    const [commentArea, setCommentArea] = useState("");
 
     useEffect(() => {
         setUpdatedBody(postToDisplay.body);
@@ -37,7 +37,7 @@ const PostDisplay = ({ postToDisplay, setPosts, posts, filterOption }) => {
                 }
             </ul>
             <strong><button className="actionButton" onClick={() => setShowMore(!showMore)}>{showMore ? '-' : '+'}</button></strong>
-            {postToDisplay.userId === userId &&
+            {postToDisplay.user_id === Number(userId) &&
                 <><PostUpdate inUpdate={inUpdate} setInUpdate={setInUpdate} postToUpdate={postToDisplay} setCommentArea={setCommentArea}
                     setPosts={setPosts} posts={posts} updatedTitle={updatedTitle} updatedBody={updatedBody} />
                     <PostRemove postToRemove={postToDisplay} setPosts={setPosts} posts={posts} setCommentArea={setCommentArea} /><br /></>}

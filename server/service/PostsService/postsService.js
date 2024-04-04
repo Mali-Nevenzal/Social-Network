@@ -26,6 +26,7 @@ export class PostService {
 
     async updatePost(updatedPost) {
         const queryUser =updateQuery("posts","title = ?, body = ?");
+        console.log("updated post: "+ updatedPost.title+" "+updatedPost.body+" "+updatedPost.id);
         const result =  await query(queryUser, [updatedPost.title, updatedPost.body,updatedPost.id]);
         return result;
     }

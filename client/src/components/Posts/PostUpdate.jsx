@@ -1,13 +1,13 @@
-
+import { useParams } from "react-router-dom";
 const PostUpdate = ({ postToUpdate, setPosts, posts, updatedTitle, updatedBody, setInUpdate, inUpdate, setCommentArea }) => {
-
+    const { userId } = useParams();
     const updatePost = () => {
         setInUpdate(false);
         if (postToUpdate.title === updatedTitle && postToUpdate.body === updatedBody)
             return;
-        const updatedFields = { title: updatedTitle, body: updatedBody };
+        const updatedFields = { title: updatedTitle, body: updatedBody,user_id:userId,id:postToUpdate.id};
         fetch(`http://localhost:8080/posts/${postToUpdate.id}`, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },

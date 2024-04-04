@@ -16,7 +16,7 @@ const PostAdd = ({ setPosts, posts, setCommentArea }) => {
     const AddPost = async (e) => {
         e.preventDefault();
         setInAddition(false);
-        const newPost = { userId: userId, title: newTitle, body: newBody }
+        const newPost = { user_id: userId, title: newTitle, body: newBody,isActive:1 }
         fetch('http://localhost:8080/posts', {
             method: 'POST',
             headers: {
@@ -27,6 +27,9 @@ const PostAdd = ({ setPosts, posts, setCommentArea }) => {
             if (!response.ok) {
                 throw new Error(`Request failed with status: ${response.status}`);
             }
+            // let id=response.json();
+            // id=id.data;
+            // newPost.id=id;
             setPosts([...posts, newPost]);
             setCommentArea("");
         }).catch(error => {
