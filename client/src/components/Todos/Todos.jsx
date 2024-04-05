@@ -12,6 +12,29 @@ const Todos = () => {
         requestUserTodos();
     }, [])
 
+    // const requestUserTodos = () => {
+    //     fetch(`http://localhost:8080/todos?userId=${Number(userId)}`)
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error(`Request failed with status: ${response.status}`);
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             if (Object.keys(data).length === 0) {
+    //                 setCommentArea("You have no todos.");
+    //             } else {
+    //                 //data.map(todo => (delete todo["userId"]))
+    //                 setTodos((todos)=>[...todos,data]);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //             setCommentArea("Server error. try again later.")
+    //         });
+    // }
+
+
     const requestUserTodos = () => {
         fetch(`http://localhost:8080/todos?userId=${Number(userId)}`)
             .then(response => {
@@ -22,10 +45,12 @@ const Todos = () => {
             })
             .then(data => {
                 if (Object.keys(data).length === 0) {
-                    setCommentArea("You have no todos.");
+                    setCommentArea("There is no todos.");
                 } else {
-                    //data.map(todo => (delete todo["userId"]))
-                    setTodos((todos)=>[...todos,data]);
+                    setTodos(data);
+                    // if (!data.find(todo => todo.userId == userId)) {
+                    //     setCommentArea("You have no todos.");
+                    // }
                 }
             })
             .catch(error => {
@@ -33,7 +58,6 @@ const Todos = () => {
                 setCommentArea("Server error. try again later.")
             });
     }
-
     return (<>
         <h2 className="title">Todos</h2>
         <TodoAdd setTodos={setTodos} todos={todos} setCommentArea={setCommentArea} /><br />
