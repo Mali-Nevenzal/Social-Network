@@ -94,7 +94,7 @@ export class RegisterController {
     async updateRegister(req, res,next) {
         try {
             const registerService = new RegisterService();
-         const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const sort = req.query.sort_ || "password";
             const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);
             if(resultItem[0])
