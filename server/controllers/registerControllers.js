@@ -81,7 +81,7 @@ export class RegisterController {
             console.log("register");
             const registerService = new RegisterService();
             await registerService.deleteRegister(req.query.username);
-            return res.status(200).json({ status: 200, data: req.query.uaername });
+            return res.status(200).json({ status: 200, data: req.query.username });
         }
         catch (ex) {
             const err = {}
@@ -93,11 +93,27 @@ export class RegisterController {
 
     async updateRegister(req, res,next) {
         try {
-                        //אימות
-            //במקרה של עדכון קוד, נדרוש קוד ישן קוד חדש נבצע אימות , ונאפשר במידה שהאימות תקין
             const registerService = new RegisterService();
+         const startIndex = (req.query.page_ - 1) * req.query.limit_;
+            const sort = req.query.sort_ || "password";
+            const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);
+            if(resultItem[0])
+            {
+                let algorithm = "sha256";
+                let key = req.body.prevPassword;
+                let digest= crypto.createHash(algorithm).update(key).digest("base64"); 
+                if(resultItem[0].password!==digest)
+                {
+                    res.status(500).json({ status: 500});
+                }
+
+            }
+            else{
+                res.status(500).json({ status: 500});
+            }
+                        //במקרה של עדכון קוד, נדרוש קוד ישן קוד חדש נבצע אימות , ונאפשר במידה שהאימות תקין
             await registerService.updateRegister(req.body);
-            res.status(200).json({ status: 200, data: req.params.email });
+            res.status(200).json({ status: 200, data: req.params.username });
         }
         catch (ex) {
             const err = {}
