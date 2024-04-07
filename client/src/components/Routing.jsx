@@ -6,6 +6,7 @@ import UserInfo from "./UserInfo";
 import Todos from "./Todos/Todos";
 import NotFound from "./NotFound";
 import Posts from "./Posts/Posts";
+import Register from "./Register";
 
 const Routing = () => {
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")));
@@ -21,6 +22,7 @@ const Routing = () => {
             <Routes>
                 <Route path="/" element={<Navigate to={currentPage} />} />
                 <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
                 <Route exact path="users/:userId/home" element={<Home />} >
                     <Route path="info" element={<UserInfo />} />
                     <Route path="todos" element={<Todos />} />
