@@ -24,9 +24,9 @@ export class RegisterService {
         console.log("in registers service in delete register, username: "+ username);
         return result;
     }
-    async updateRegister(updatedRegister) {
+    async updateRegister(username,password) {
         const queryUser = updateQuery("register","password = ?","username");
-        const result =  await query(queryUser, [updatedRegister.password,updatedRegister.username]);
+        const result =  await query(queryUser, [username,password]);
         return result;
     }
 
