@@ -25,8 +25,8 @@ export class RegisterService {
         return result;
     }
     async updateRegister(updatedRegister) {
-        const queryUser = updateQuery("register","password = ?","email");
-        const result =  await query(queryUser, [updatedRegister.password]);
+        const queryUser = updateQuery("register","password = ?","username");
+        const result =  await query(queryUser, [updatedRegister.password,updatedRegister.username]);
         return result;
     }
 
