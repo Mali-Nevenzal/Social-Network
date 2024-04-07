@@ -26,7 +26,7 @@ export class UsersService {
         return result;
     }
     async updateUser(updatedUser) {
-        const queryUser = updateQuery("users","name = ?, email = ?,phone=?");
+        const queryUser = updateQuery("users","name = ?, email = ?,phone=?","id");
         const result =  await query(queryUser, [updatedUser.name, updatedUser.email,updatedUser.phone,updatedUser.id]);
         return result;
     }

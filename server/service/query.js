@@ -16,8 +16,8 @@ function deleteQuery(table_name,idParameter){
     const query=`DELETE FROM ${db}.${table_name} WHERE  ${idParameter} = ?`;
     return query;
 }
-function updateQuery(table_name,values){
-    const query=`UPDATE ${db}.${table_name} SET ${values}  WHERE id=?`;
+function updateQuery(table_name,values,idParameter){
+    const query=`UPDATE ${db}.${table_name} SET ${values}  WHERE ${idParameter}=?`;
     return query;
 }
 function addQuery(table_name,values,columnsNum){
