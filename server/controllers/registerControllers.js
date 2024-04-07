@@ -25,7 +25,7 @@ export class RegisterController {
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const sort = req.query.sort_ || "passwordd";
            //inter if there is a same email.
-            const resultItem = await registerService.getRegister(req.body.email,req.query.limit_,startIndex,sort);                 
+            const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);                 
             let algorithm = "sha256"                
             let key = req.body.password;
             let digest2 = crypto.createHash(algorithm).update(key).digest("base64") 
@@ -48,7 +48,7 @@ export class RegisterController {
             const registerService = new RegisterService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const sort = req.query.sort_ || "password";
-            const resultItem = await registerService.getRegister(req.body.email,req.query.limit_,startIndex,sort);
+            const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);
             if(resultItem[0])
             {
                 let algorithm = "sha256";
@@ -80,8 +80,8 @@ export class RegisterController {
         try {
             console.log("register");
             const registerService = new RegisterService();
-            await registerService.deleteRegister(req.query.email);
-            return res.status(200).json({ status: 200, data: req.query.email });
+            await registerService.deleteRegister(req.query.username);
+            return res.status(200).json({ status: 200, data: req.query.username });
         }
         catch (ex) {
             const err = {}
@@ -96,7 +96,7 @@ export class RegisterController {
             const registerService = new RegisterService();
          const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const sort = req.query.sort_ || "password";
-            const resultItem = await registerService.getRegister(req.body.email,req.query.limit_,startIndex,sort);
+            const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);
             if(resultItem[0])
             {
                 let algorithm = "sha256";
@@ -113,7 +113,7 @@ export class RegisterController {
             }
                         //במקרה של עדכון קוד, נדרוש קוד ישן קוד חדש נבצע אימות , ונאפשר במידה שהאימות תקין
             await registerService.updateRegister(req.body);
-            res.status(200).json({ status: 200, data: req.params.email });
+            res.status(200).json({ status: 200, data: req.params.username });
         }
         catch (ex) {
             const err = {}
