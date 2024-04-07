@@ -3,11 +3,10 @@ import {postsRouter} from './Routers/postsRouter.js'
 import {todosRouter} from './Routers/todosRouter.js'
 import {commentsRouter} from './Routers/commentsRouter.js'
 import { registerRouter } from './Routers/registerRouter.js'
-import { logErrors } from "./middleware/logErrors.js";
-import express from 'express';
-import morgan from 'morgan'; 
-
-import cors from 'cors';
+import { logErrors } from "./middleware/logErrors.js"
+import express from 'express'
+import morgan from 'morgan'
+import cors from 'cors'
 
 const app = express();
 app.use(cors());
