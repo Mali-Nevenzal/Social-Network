@@ -24,6 +24,7 @@ export class RegisterController {
             const registerService = new RegisterService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const sort = req.query.sort_ || "passwordd";
+           //inter if there is a same email.
             const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);                 
             let algorithm = "sha256"                
             let key = req.body.password;
@@ -93,7 +94,7 @@ export class RegisterController {
     async updateRegister(req, res,next) {
         try {
                         //אימות
-
+            //במקרה של עדכון קוד, נדרוש קוד ישן קוד חדש נבצע אימות , ונאפשר במידה שהאימות תקין
             const registerService = new RegisterService();
             await registerService.updateRegister(req.body);
             res.status(200).json({ status: 200, data: req.params.email });
