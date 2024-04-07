@@ -25,7 +25,7 @@ const Register = () => {
             body: JSON.stringify({username:userDetails.username,password:userDetails.password}),
         })
       .then(data => {
-        if (Object.keys(data).length === 0) {
+        if (data.status===204) {
           setContinueRegistation(true);
         }
         else {
@@ -66,6 +66,13 @@ const Register = () => {
     const regex = /^[a-z]*[a-z]\.[a-z]+$/;
     return regex.test(inputString);
   };
+  const checkStringLength=(inputStr) =>{
+    if (inputStr.length >= 5 && inputStr.length < 12) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,7 +82,7 @@ const Register = () => {
         setErrorDisplay((prevData) => ({ ...prevData, [name]: !isValidUsername(value) ? "User name may contain only english letters or numbers" : "" }));
         break;
       case "password":
-        setErrorDisplay((prevData) => ({ ...prevData, [name]: !isValidPassword(value) ? "Password must contain at least 3 characters, including dot." : "" }));
+        setErrorDisplay((prevData) => ({ ...prevData, [name]: !checkStringLength(value) ? "Password must contain at least 6 characters,and at most 10 chracters." : "" }));
         break;
       default: break;
     }

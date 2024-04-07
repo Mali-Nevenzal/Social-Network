@@ -64,7 +64,7 @@ export class RegisterController {
                 }
             }
             else{
-                res.status(500).json({ status: 500});
+                res.status(204).json({ status: 204});
             }
 
         }

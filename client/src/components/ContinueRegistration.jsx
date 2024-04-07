@@ -8,13 +8,14 @@ const ContinueRegistration = ({ username, password }) => {
     email: '',
     phone: ''
   }
-  const registerFields = {
-    username: username,
-    password :password
+  const fieldsError = {
+    name: '',
+    email: '',
+    phone: ''
   }
 
   const [userDetails, setUserDetails] = useState(fields);
-  const [errorDisplay, setErrorDisplay] = useState(fields);
+  const [errorDisplay, setErrorDisplay] = useState(fieldsError);
   const [globalError, setGlobalError] = useState("");
   const navigate = useNavigate();
 
@@ -22,13 +23,7 @@ const ContinueRegistration = ({ username, password }) => {
     setGlobalError("");
   }, [userDetails])
 
-  function checkStringLength(inputStr) {
-    if (inputStr.length >= 5 && inputStr.length < 12) {
-        return true;
-    } else {
-        return false;
-    }
-}
+
 
   const isValidEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -86,13 +81,13 @@ const ContinueRegistration = ({ username, password }) => {
     return true;
   };
 
-  const postRequest = () => {
-    fetch('http://localhost:8080/register', {
+  const postRequest =async () => {
+    await fetch('http://localhost:8080/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(registerFields),
+        body: JSON.stringify({username:username,password:password}),
     }).then(response => {
     if (!response.ok) {
         throw new Error(`Request failed with status: ${response.status}`);
@@ -117,7 +112,7 @@ const ContinueRegistration = ({ username, password }) => {
       else {
 
         const userId = response.json();
-        userDetails.id = todoId.insertId;
+        userDetails.id = userId.insertId;
         const updatedUser = { ...userDetails };
         localStorage.setItem("currentUser", JSON.stringify(updatedUser));
         navigate(`/users/${userDetails.id}/home`);
@@ -129,6 +124,7 @@ const ContinueRegistration = ({ username, password }) => {
   }
 
   const handleSubmit = (e) => {
+    setUserDetails((prevData) => ({ ...prevData, username: username }));
     e.preventDefault();
     if (!isObjectEmpty(errorDisplay)) {
       return;
@@ -157,49 +153,7 @@ const ContinueRegistration = ({ username, password }) => {
       </label>
       {<p className='commentArea'>{errorDisplay.phone}</p>}
 
-      <h4>Address:</h4>
-      <label>
-        Street:
-        <input type="text" name="address.street" value={userDetails.address.street} onChange={handleChange} required noValidate />
-      </label>
-      {<p className='commentArea'>{errorDisplay.address.street}</p>}
-
-      <label>
-        Suite:
-        <input type="text" name="address.suite" value={userDetails.address.suite} onChange={handleChange} required noValidate />
-      </label>
-      {<p className='commentArea'>{errorDisplay.address.suite}</p>}
-
-      <label>
-        City:
-        <input type="text" name="address.city" value={userDetails.address.city} onChange={handleChange} required noValidate />
-      </label>
-      {<p className='commentArea'>{errorDisplay.address.city}</p>}
-      <label>
-        Zipcode:
-        <input type="text" name="address.zipcode" value={userDetails.address.zipcode} onChange={handleChange} required noValidate />
-      </label>
-      {<p className='commentArea'>{errorDisplay.address.zipcode}</p>}
-
-      <h4>Company:</h4>
-      <label>
-        Company Name:
-        <input type="text" name="company.name" value={userDetails.company.name} onChange={handleChange} required noValidate />
-      </label>
-      {<p className='commentArea'>{errorDisplay.company.name}</p>}
-
-      <label>
-        Catchphrase:
-        <input type="text" name="company.catchPhrase" value={userDetails.company.catchPhrase} onChange={handleChange} required noValidate />
-      </label>
-      {<p className='commentArea'>{errorDisplay.company.catchPhrase}</p>}
-
-      <label>
-        BS:
-        <input type="text" name="company.bs" value={userDetails.company.bs} onChange={handleChange} required noValidate />
-      </label>
-      {<p className='commentArea'>{errorDisplay.company.bs}</p>}<br />
-
+      
       <button className="addButton" type="submit">Register</button>
       {<p className='commentArea'>{globalError}</p>}<br />
     </form>
