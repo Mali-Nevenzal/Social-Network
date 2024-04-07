@@ -42,7 +42,8 @@ export class TodosController {
             console.log(req.body)
             const resultItem = await todosService.addTodo(req.body);
             console.log(resultItem);
-            return res.status(200).json({ status: 200, data: resultItem.insertId });
+            res.status(200).json({ insertId: resultItem.insertId });
+
         }
         catch (ex) {
             const err = {}

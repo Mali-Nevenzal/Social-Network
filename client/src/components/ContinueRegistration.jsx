@@ -120,6 +120,7 @@ const ContinueRegistration = ({ username, password }) => {
     //   console.error(error);
     //   setGlobalError("Server error. try again later.")
     // })
+    
     fetch('http://localhost:8080/users', {
             method: 'POST',
             headers: {
@@ -130,13 +131,18 @@ const ContinueRegistration = ({ username, password }) => {
             if (!response.ok) {
                 throw new Error(`Request failed with status: ${response.status}`);
             }
-            const userId = response.json();
+            return response.json();
+        }).then(data=>{
+            const userId = data;
             userDetails.id = userId.insertId;
+            setUserDetails((prevData) => ({ ...prevData, userDetails }));
+
             //setTodos([...todos, userDetails]);
             localStorage.setItem("currentUser", JSON.stringify(userDetails));
             navigate(`/users/${userDetails.id}/home`);
             //setCommentArea("");
-        }).catch(error => {
+        })
+        .catch(error => {
             console.error(error);
             setGlobalError("Server error. try again later.")
         })
