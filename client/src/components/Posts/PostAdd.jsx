@@ -25,11 +25,12 @@ const PostAdd = ({ setPosts, posts, setCommentArea }) => {
             body: JSON.stringify(newPost),
         }).then(response => {
             if (!response.ok) {
-                throw new Error(`Request failed with status: ${response.status}`);
+               throw new Error(`Request failed with status: ${response.status}`);
             }
-            // let id=response.json();
-            // id=id.data;
-            // newPost.id=id;
+         return response.json();
+        }).then(data=>{
+            const newId=data.insertId;
+             newPost.id=newId;
             setPosts([...posts, newPost]);
             setCommentArea("");
         }).catch(error => {

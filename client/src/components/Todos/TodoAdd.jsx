@@ -24,8 +24,9 @@ const TodoAdd = ({ todos, setTodos, setCommentArea }) => {
             if (!response.ok) {
                 throw new Error(`Request failed with status: ${response.status}`);
             }
-            const todoId = response.json();
-            newTodo.id = todoId.insertId;
+            return response.json();
+        }).then(data=>{
+            newTodo.id = data.insertId;
             setTodos([...todos, newTodo]);
             setCommentArea("");
         }).catch(error => {
