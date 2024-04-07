@@ -36,7 +36,6 @@ export default function Home() {
           <NavLink className="link" onClick={() => logout()}>Logout</NavLink>
           <NavLink className="link" to="info" onClick={() => setLinkClicked(true)}>Info</NavLink>
           <NavLink className="link" to="todos" onClick={() => setLinkClicked(true)}>Todos</NavLink>
-          <NavLink className="link" to="albums" onClick={() => setLinkClicked(true)}>Albums</NavLink>
           <NavLink className="link" to="posts" onClick={() => setLinkClicked(true)}>Posts</NavLink>
         </div>
       </div>

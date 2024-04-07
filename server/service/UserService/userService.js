@@ -6,14 +6,14 @@ const postService = new PostService();
 const todoService=new TodosService();
 export class UsersService {
 
-    async getUsers(limit,start) {
-        const queryUsers = getQuery("users",limit,start,"Where is_active=1");
+    async getUsers(limit,start,sort) {
+        const queryUsers = getQuery("users",limit,start,sort,"Where is_active=1");
         const result = await query(queryUsers);
         return result;
     }
 
-    async getUserByUsername(username,limit=100,start=0) {
-        const queryUser = getByIdQuery("users","is_active=1 AND username",limit,start);
+    async getUserByUsername(username,limit=100,start=0,sort) {
+        const queryUser = getByIdQuery("users","is_active=1 AND username",limit,start,sort);
         const result =  await query(queryUser, [username]);
         return result;
     }

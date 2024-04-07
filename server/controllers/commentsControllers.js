@@ -6,11 +6,10 @@ export class CommentsController {
         try {
             const commentsService = new CommentsService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            let resultItems = await commentsService.getComments(req.query.limit_,startIndex,"post_id");
-            //resultItems=commentsService.sortComments(resultItems, req.query.sort_);       
-             //console.log("after sorting "+resultItems);
-
-            return res.status(200).json(resultItems);
+            const sort = req.query.sort_ || "id";
+            console.log("sort with: "+sort);
+            let resultItems = await commentsService.getComments(req.query.limit_,startIndex,sort,"post_id");
+             return res.status(200).json(resultItems);
         }
         catch (ex) {
             const err = {}
@@ -24,10 +23,8 @@ export class CommentsController {
         try {
             const commentsService = new CommentsService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItem = await commentsService.getCommentById(req.params.id,req.query.limit_,startIndex,"post_id");
-            // "data": {
-            //     "insertId": 123
-            //   }
+            const sort = req.query.sort_ || "id";
+            const resultItem = await commentsService.getCommentById(req.params.id,req.query.limit_,startIndex,"post_id",sort);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {

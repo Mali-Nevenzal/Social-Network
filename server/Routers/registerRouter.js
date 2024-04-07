@@ -6,7 +6,7 @@ const registerRouter = express.Router();
 const registerController = new RegisterController()
 
 //registerRouter.get("/", registerController.getRegisterByEmail)
-registerRouter.post("/", registerController.getRegister)
+registerRouter.post("/:email", registerController.getRegister)
 registerRouter.delete("/:username", registerController.deleteRegister)
 
 export {

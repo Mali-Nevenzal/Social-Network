@@ -5,8 +5,8 @@ import {addQuery,deleteQuery,getByIdQuery} from '../query.js'
 export class RegisterService {
 
 
-    async getRegister(username,limit,start) {
-        const queryRegister = getByIdQuery("register","username",limit,start);
+    async getRegister(username,limit,start,sort) {
+        const queryRegister = getByIdQuery("register","username",limit,start,sort);
         const result =  await query(queryRegister, [username]);
         return result;
     }
