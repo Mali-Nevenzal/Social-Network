@@ -1,6 +1,6 @@
 
 import { query } from '../db.js';
-import {addQuery,deleteQuery,getByIdQuery} from '../query.js'
+import {addQuery,deleteQuery,getByIdQuery,updateQuery} from '../query.js'
 
 export class RegisterService {
 
@@ -25,8 +25,8 @@ export class RegisterService {
         return result;
     }
     async updateRegister(updatedRegister) {
-        const queryUser =updateQuery("register","password = ?");
-        const result =  await query(queryUser, [updatedRegister.password,updatedPost.email]);
+        const queryUser = updateQuery("register","password = ?","email");
+        const result =  await query(queryUser, [updatedRegister.password]);
         return result;
     }
 

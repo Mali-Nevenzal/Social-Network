@@ -33,7 +33,7 @@ export class TodosService {
     }
 
     async updateTodo(updatedTodo) {
-        const queryTodo =updateQuery("todos","title = ?, completed = ?");
+        const queryTodo =updateQuery("todos","title = ?, completed = ?","id");
         const result =  await query(queryTodo, [updatedTodo.title, updatedTodo.completed,updatedTodo.id]);
         return result;
     }
