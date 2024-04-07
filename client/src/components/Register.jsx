@@ -10,19 +10,20 @@ const Register = () => {
     confirmPassword: ''
   }
 
+
   const [userDetails, setUserDetails] = useState(fields);
   const [errorDisplay, setErrorDisplay] = useState(fields);
   const [globalError, setGlobalError] = useState('');
   const [continueRegistation, setContinueRegistation] = useState(false);
 
   const isUsernameExist = (usernameValue) => {
-    fetch(`http://localhost:3000/users?username=${usernameValue}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
-        }
-        return response.json();
-      })
+    fetch(`http://localhost:8080/register/${usernameValue}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fields.username,fields.password),
+        })
       .then(data => {
         if (Object.keys(data).length === 0) {
           setContinueRegistation(true);

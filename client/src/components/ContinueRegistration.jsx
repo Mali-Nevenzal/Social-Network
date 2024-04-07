@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { runId } from "./Tools";
 const ContinueRegistration = ({ username, password }) => {
 
   const fields = {
@@ -22,6 +21,14 @@ const ContinueRegistration = ({ username, password }) => {
   useEffect(() => {
     setGlobalError("");
   }, [userDetails])
+
+  function checkStringLength(inputStr) {
+    if (inputStr.length >= 5 && inputStr.length < 12) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
   const isValidEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -108,7 +115,7 @@ const ContinueRegistration = ({ username, password }) => {
         throw new Error(`Request failed with status: ${response.status}`);
       }
       else {
-        
+
         const userId = response.json();
         userDetails.id = todoId.insertId;
         const updatedUser = { ...userDetails };
