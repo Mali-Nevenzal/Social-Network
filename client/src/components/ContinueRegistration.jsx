@@ -30,7 +30,7 @@ const ContinueRegistration = ({ username, password }) => {
     return emailRegex.test(email);
   };
   const isValidString = (inputString) => {
-    const regex = /^[a-zA-Z\s-]{1,30}$/;
+    const regex = /^[a-zA-Z]+$/;
     return regex.test(inputString);
   };
   const isValidNumber = (inputString) => {
@@ -99,28 +99,47 @@ const ContinueRegistration = ({ username, password }) => {
 
 
 
+    // fetch('http://localhost:8080/users', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(userDetails),
+    // }).then(response => {
+    //   if (!response.ok) {
+    //     throw new Error(`Request failed with status: ${response.status}`);
+    //   }
+    //   else {
+    //     const userId = response.json();
+    //     userDetails.id = userId.data;
+    //     const updatedUser = { ...userDetails };
+    //     localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+    //     navigate(`/users/${userDetails.id}/home`);
+    //   }
+    // }).catch(error => {
+    //   console.error(error);
+    //   setGlobalError("Server error. try again later.")
+    // })
     fetch('http://localhost:8080/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userDetails),
-    }).then(response => {
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-      else {
-
-        const userId = response.json();
-        userDetails.id = userId.insertId;
-        const updatedUser = { ...userDetails };
-        localStorage.setItem("currentUser", JSON.stringify(updatedUser));
-        navigate(`/users/${userDetails.id}/home`);
-      }
-    }).catch(error => {
-      console.error(error);
-      setGlobalError("Server error. try again later.")
-    })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userDetails),
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+            const userId = response.json();
+            userDetails.id = userId.insertId;
+            //setTodos([...todos, userDetails]);
+            localStorage.setItem("currentUser", JSON.stringify(userDetails));
+            navigate(`/users/${userDetails.id}/home`);
+            //setCommentArea("");
+        }).catch(error => {
+            console.error(error);
+            setGlobalError("Server error. try again later.")
+        })
   }
 
   const handleSubmit = (e) => {
