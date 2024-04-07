@@ -5,14 +5,16 @@ import {addQuery,updateQuery,deleteQuery,getByIdQuery,getQuery} from '../query.j
 
 export class CommentsService {
 
-    async getComments(limit,start) {
-        const queryComments = getQuery("comments",limit,start);
+    async getComments(limit,start,sort) {
+        console.log("in get comments sort: "+sort);
+        const queryComments = getQuery("comments",limit,start,sort);
+        console.log("in commentService getComments query: "+ queryComments);
         const result = await query(queryComments);
         return result;
     }
-    async getCommentById(id,limit,start,idParameter) {
+    async getCommentById(id,limit,start,idParameter,sort) {
         console.log("in comment by id in service ")
-        const queryComment = getByIdQuery("comments",idParameter,limit,start);
+        const queryComment = getByIdQuery("comments",idParameter,limit,start,sort);
         console.log("after get by id query: "+queryComment +" id: "+id);
         const result =  await query(queryComment, [id]);
         return result;

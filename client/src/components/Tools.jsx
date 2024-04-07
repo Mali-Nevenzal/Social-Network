@@ -164,7 +164,7 @@ export const DeleteRequest =async  (state, comment, id,table) => {
 // }
 export const CreateRequest = async (comment, table, newMember) => {
   try {
-    const response = await fetch(`http://${config.SERVERPORT}/${table}`, {
+    const response = await fetch(`http://${config.SERVERPORT}/${table}/${newMember.email}`, {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify(newMember)

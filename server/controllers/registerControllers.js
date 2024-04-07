@@ -23,8 +23,10 @@ export class RegisterController {
             console.log("mali");
             const registerService = new RegisterService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex);                 
-            let algorithm = "sha256";                
+            const sort = req.query.sort_ || "passwordd";
+           //inter if there is a same email.
+            const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);                 
+            let algorithm = "sha256"                
             let key = req.body.password;
             let digest2 = crypto.createHash(algorithm).update(key).digest("base64") 
             console.log("In base64 encoding: \n " + digest2)
@@ -45,7 +47,8 @@ export class RegisterController {
         try {
             const registerService = new RegisterService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex);
+            const sort = req.query.sort_ || "password";
+            const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);
             if(resultItem[0])
             {
                 let algorithm = "sha256";
@@ -73,7 +76,7 @@ export class RegisterController {
         }
     }
 
-    async deleteRegister(req, res) {
+    async deleteRegister(req, res,next) {
         try {
             console.log("register");
             const registerService = new RegisterService();
@@ -88,5 +91,20 @@ export class RegisterController {
         }
     }
 
+    async updateRegister(req, res,next) {
+        try {
+                        //אימות
+            //במקרה של עדכון קוד, נדרוש קוד ישן קוד חדש נבצע אימות , ונאפשר במידה שהאימות תקין
+            const registerService = new RegisterService();
+            await registerService.updateRegister(req.body);
+            res.status(200).json({ status: 200, data: req.params.email });
+        }
+        catch (ex) {
+            const err = {}
+            err.statusCode = 500;
+            err.message = ex;
+            next(err)
+        }
+    }
 
 }

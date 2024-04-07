@@ -5,7 +5,8 @@ export default class PostsController {
         try {
             const postService = new PostService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultPosts = await postService.getPosts(req.query.limit_,startIndex);
+            const sort = req.query.sort_ || "id";
+            const resultPosts = await postService.getPosts(req.query.limit_,startIndex,sort);
             return res.status(200).json(resultPosts);
         }
         catch (ex) {
@@ -22,7 +23,8 @@ export default class PostsController {
 
             const postService = new PostService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItems = await postService.getPostById(req.params.id,req.query.limit_,startIndex);
+            const sort = req.query.sort_ || "id";
+            const resultItems = await postService.getPostById(req.params.id,req.query.limit_,startIndex,sort);
             return res.status(200).json({ status: 200, data: resultItems });
         }
         catch (ex) {

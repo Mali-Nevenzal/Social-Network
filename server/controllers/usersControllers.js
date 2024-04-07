@@ -8,7 +8,8 @@ export default class UsersController {
 
             const userService = new UsersService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItems = await userService.getUsers(req.query.limit_,startIndex);
+            const sort = req.query.sort_ || "id";
+            const resultItems = await userService.getUsers(req.query.limit_,startIndex,sort);
             return res.status(200).json(resultItems);
         }
         catch (ex) {
@@ -24,7 +25,8 @@ export default class UsersController {
         try {
             const userService = new UsersService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItems = await userService.getUserByUsername(req.params.username,req.query.limit_,startIndex);
+            const sort = req.query.sort_ || "id";
+            const resultItems = await userService.getUserByUsername(req.params.username,req.query.limit_,startIndex,sort);
             return res.status(200).json(resultItems);
         }
         catch (ex) {

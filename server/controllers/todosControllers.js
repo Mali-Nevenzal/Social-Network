@@ -6,7 +6,8 @@ export class TodosController {
             try {
                 const todosService = new TodosService();
                 const startIndex = (req.query.page_ - 1) * req.query.limit_;
-                const resultItems = await todosService.getTodos(req.query.userId,req.query.limit_,startIndex)
+                const sort = req.query.sort_ || "id";
+                const resultItems = await todosService.getTodos(req.query.userId,req.query.limit_,startIndex,sort)
                 return res.status(200).json(resultItems);
             }
         
@@ -22,7 +23,8 @@ export class TodosController {
         try {
             const todosService = new TodosService();
             const startIndex = (req.query.page_ - 1) * req.query.limit_;
-            const resultItem = await todosService.getTodoById(req.params.id,req.query.limit_,startIndex);
+            const sort = req.query.sort_ || "id";
+            const resultItem = await todosService.getTodoById(req.params.id,req.query.limit_,startIndex,sort);
             res.status(200).json({ status: 200, data: resultItem });
         }
         catch (ex) {

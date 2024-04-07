@@ -5,8 +5,8 @@ import {addQuery,deleteQuery,getByIdQuery} from '../query.js'
 export class RegisterService {
 
 
-    async getRegister(username,limit,start) {
-        const queryRegister = getByIdQuery("register","username",limit,start);
+    async getRegister(username,limit,start,sort) {
+        const queryRegister = getByIdQuery("register","username",limit,start,sort);
         const result =  await query(queryRegister, [username]);
         return result;
     }
@@ -22,6 +22,11 @@ export class RegisterService {
         const queryRegister = deleteQuery("register","username");
         const result =  await query(queryRegister, [username]);
         console.log("in registers service in delete register, username: "+ username);
+        return result;
+    }
+    async updateRegister(updatedRegister) {
+        const queryUser =updateQuery("register","password = ?");
+        const result =  await query(queryUser, [updatedRegister.password,updatedPost.email]);
         return result;
     }
 

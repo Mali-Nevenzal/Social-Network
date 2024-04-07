@@ -3,8 +3,16 @@
 export const logErrors = (error, req, res, next) => {
     const statusCode = error && error.hasOwnProperty("statusCode") ? error.statusCode : 500;
     const message = error && error.hasOwnProperty("message") ? error.message : '';
-    console.error(`error statusCode:  ${statusCode} message: ${message} `)
-    return res.status(statusCode).json({ error: errMessageForClient(statusCode) });
+    
+    // Log error details including request information
+    console.error(`Error: ${message}`);
+    console.error(`Status Code: ${statusCode}`);
+    console.error(`Request URL: ${req.originalUrl}`);
+    console.error(`Request Method: ${req.method}`);
+    console.error(`Request Headers: ${JSON.stringify(req.headers)}`);
+    
+    // Send an appropriate error response to the client
+    return res.status(statusCode).json({ error: errMessageForClient(statusCode, message) });
 }
 
 function errMessageForClient(statusCode) {
