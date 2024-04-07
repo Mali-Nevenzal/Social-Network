@@ -22,7 +22,7 @@ const Register = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(fields.username,fields.password),
+            body: JSON.stringify({username:userDetails.username,password:userDetails.password}),
         })
       .then(data => {
         if (Object.keys(data).length === 0) {
