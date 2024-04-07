@@ -50,6 +50,7 @@ export default function Login( ) {
         </div><br />
         <button className="addButton" type="submit">Login</button>
       </form>
+      <Link className="link" to="/register">registration</Link>
       {commentArea && <p className='commentArea'>{commentArea}</p>}
     </>
   )

@@ -94,6 +94,7 @@ export class RegisterController {
     async updateRegister(req, res,next) {
         try {
             const registerService = new RegisterService();
+            let digest;
          const startIndex = (req.query.page_ - 1) * req.query.limit_;
             const sort = req.query.sort_ || "password";
             const resultItem = await registerService.getRegister(req.body.username,req.query.limit_,startIndex,sort);
@@ -101,7 +102,7 @@ export class RegisterController {
             {
                 let algorithm = "sha256";
                 let key = req.body.prevPassword;
-                let digest= crypto.createHash(algorithm).update(key).digest("base64"); 
+                digest= crypto.createHash(algorithm).update(key).digest("base64"); 
                 if(resultItem[0].password!==digest)
                 {
                     res.status(500).json({ status: 500});
@@ -112,7 +113,7 @@ export class RegisterController {
                 res.status(500).json({ status: 500});
             }
                         //במקרה של עדכון קוד, נדרוש קוד ישן קוד חדש נבצע אימות , ונאפשר במידה שהאימות תקין
-            await registerService.updateRegister(req.body);
+            await registerService.updateRegister(req.body.username,digest);
             res.status(200).json({ status: 200, data: req.params.username });
         }
         catch (ex) {
