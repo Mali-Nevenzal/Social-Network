@@ -108,6 +108,7 @@ const ContinueRegistration = ({ username, password }) => {
         throw new Error(`Request failed with status: ${response.status}`);
       }
       else {
+        
         const userId = response.json();
         userDetails.id = todoId.insertId;
         const updatedUser = { ...userDetails };
